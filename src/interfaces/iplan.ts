@@ -1,4 +1,3 @@
-import { Input } from "@angular/core";
 
 export class IPlan {
   id: string;

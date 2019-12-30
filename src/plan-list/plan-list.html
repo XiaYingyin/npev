@@ -21,7 +21,7 @@
           </div>
       </div>
 
-      <td width="30%"><a [routerLink]="['/PlanView', plan.id]">{{plan.name}}</a></td>
+      <td width="30%"><a [routerLink]="['/plans/', plan.id]">{{plan.name}}</a></td>
       <td>created on {{plan.createdOn | momentDate }}</td>
       <td class="align-right"><button class="btn btn-danger" (click)="requestDelete(plan)">
         <i class="fa fa-trash"></i>delete</button>

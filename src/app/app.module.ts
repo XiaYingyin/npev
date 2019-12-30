@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { App } from './app.component';
+import { AppComponent } from './app.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +16,7 @@ import { PlanNode } from '../plan-node/plan-node';
 
 @NgModule({
   declarations: [
-    App,
+    AppComponent,
     PlanList,
     PlanNew,
     PlanView,
@@ -35,6 +35,6 @@ imports: [
 providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy}
 ],
-  bootstrap: [App]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

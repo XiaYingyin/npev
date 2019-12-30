@@ -1,6 +1,6 @@
 # Npev
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
+This project was refactored by [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21 from [AlexTatiyants](https://github.com/AlexTatiyants/)'s [pev](https://github.com/AlexTatiyants/pev).
 
 ## Development server
 

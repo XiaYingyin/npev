@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import {IPlan} from '../interfaces/iplan';
 
 import {PlanService} from '../services/plan-service';
-import {SqlService} from '../services/sql-service';
 
 @Component({
     selector: 'plan-new',

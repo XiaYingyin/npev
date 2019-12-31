@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {IPlan} from '../interfaces/iplan';
 
 import {PlanService} from '../services/plan-service';
+import {SqlService} from '../services/sql-service';
 
 @Component({
     selector: 'plan-new',
@@ -21,6 +22,10 @@ export class PlanNew {
     constructor(private _router: Router, private _planService: PlanService) { }
 
     submitPlan() {
+        if (this.newPlanContent == null) {
+          this.validationMessage = 'The string you submitted is NULL';
+          return;
+        }
         // remove psql generated header
         this.newPlanContent = this.newPlanContent.replace('QUERY PLAN', '');
 

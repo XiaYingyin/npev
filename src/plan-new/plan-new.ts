@@ -1,15 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {IPlan} from '../interfaces/iplan';
 
-import {PlanService} from '../services/plan-service';
+import {IPlan, PlanService} from '../services/plan-service';
 import {SqlService} from '../services/sql-service';
 
 @Component({
     selector: 'plan-new',
     templateUrl: './plan-new.html',
-    providers: [PlanService],
-    //directives: [ROUTER_DIRECTIVES]
+    providers: [PlanService, SqlService],
 })
 export class PlanNew {
     planIds: string[];
@@ -19,23 +17,25 @@ export class PlanNew {
     newPlan: IPlan;
     validationMessage: string;
 
-    constructor(private _router: Router, private _planService: PlanService) { }
+    constructor(private _router: Router, private _planService: PlanService, private _sqlService: SqlService) { }
 
     submitPlan() {
-        if (this.newPlanContent == null) {
-          this.validationMessage = 'The string you submitted is NULL';
-          return;
-        }
-        // remove psql generated header
-        this.newPlanContent = this.newPlanContent.replace('QUERY PLAN', '');
-
-        if (!this._planService.isJsonString(this.newPlanContent)) {
-            this.validationMessage = 'The string you submitted is not valid JSON'
+      if (this.newPlanQuery == null) {
+        this.validationMessage = 'The string you submitted is null';
+        return;
+      }
+      this._sqlService.getQueryPlan(this.newPlanQuery).subscribe(res => {
+        this.newPlanContent = JSON.stringify(res);
+        if (this.newPlanContent !== null) {  
+          if (!this._planService.isJsonString(this.newPlanContent)) {
+            this.validationMessage = 'The string you submitted is not valid JSON';
             return;
+          }
+  
+          this.newPlan = this._planService.createPlan(this.newPlanName, this.newPlanContent, this.newPlanQuery);
+          this._router.navigate(['/plans/', this.newPlan.id]);
         }
-
-        this.newPlan = this._planService.createPlan(this.newPlanName, this.newPlanContent, this.newPlanQuery);
-        this._router.navigate(['/plans/', this.newPlan.id ]);
+      });
     }
 
     prefill() {

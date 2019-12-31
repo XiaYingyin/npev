@@ -1,9 +1,18 @@
-import {IPlan} from '../interfaces/iplan';
+//import {IPlan} from '../interfaces/iplan';
 import {EstimateDirection} from '../enums';
 import * as _ from 'lodash';
 //import moment = require('moment');
 import * as moment from 'moment';
 
+export interface IPlan {
+    id: string;
+    name: string;
+    content: any;
+    query: string;
+    createdOn: Date;
+    planStats?: any;
+    formattedQuery?: string;
+}
 
 export class PlanService {
     // plan property keys

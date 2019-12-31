@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
-import {IPlan} from '../interfaces/iplan';
+//import {IPlan} from '../interfaces/iplan';
 import {HighlightType, ViewMode} from '../enums';
-import {PlanService} from '../services/plan-service';
+import {IPlan, PlanService} from '../services/plan-service';
 import {SyntaxHighlightService} from '../services/syntax-highlight-service';
 
 @Component({

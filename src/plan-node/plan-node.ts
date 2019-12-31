@@ -1,8 +1,8 @@
-import {IPlan} from '../interfaces/iplan';
+//import {IPlan} from '../interfaces/iplan';
 import {Component, Input} from '@angular/core';
 import {HighlightType, EstimateDirection, ViewMode} from '../enums';
 
-import {PlanService} from '../services/plan-service';
+import {IPlan, PlanService} from '../services/plan-service';
 import {SyntaxHighlightService} from '../services/syntax-highlight-service';
 import {HelpService} from '../services/help-service';
 import {ColorService} from '../services/color-service';

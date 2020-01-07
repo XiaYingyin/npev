@@ -17,6 +17,7 @@ import { PlanNode } from '../plan-node/plan-node';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { AppBootstrapModule } from './app-bootstrap.module';
+import { HomeComponent } from '../home/home.component';
 
 @NgModule({
    declarations: [
@@ -30,7 +31,8 @@ import { AppBootstrapModule } from './app-bootstrap.module';
       DurationUnitPipe,
       PlanNode,
       NavbarComponent,
-      FooterComponent
+      FooterComponent,
+      HomeComponent
    ],
    imports: [
       BrowserModule,

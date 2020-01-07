@@ -5,9 +5,11 @@ import {PlanView} from '../plan-view/plan-view';
 import {PlanList} from '../plan-list/plan-list';
 import {PlanNew} from '../plan-new/plan-new';
 import {About} from '../about/about';
+import { HomeComponent } from '../home/home.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: 'plans', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'plans', component: PlanList},
   { path: 'plans/new', component: PlanNew },
   { path: 'plans/:id', component: PlanView },

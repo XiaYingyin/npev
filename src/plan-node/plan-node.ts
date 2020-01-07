@@ -37,6 +37,7 @@ export class PlanNode {
 
     // UI flags
     showDetails: boolean;
+    showQuery: boolean;
 
     // calculated properties
     executionTimePercent: number;
@@ -59,7 +60,7 @@ export class PlanNode {
     highlightTypes = HighlightType;
     viewModes = ViewMode;
 
-    constructor(private _planService: PlanService,
+    constructor(public _planService: PlanService,
         private _syntaxHighlightService: SyntaxHighlightService,
         private _helpService: HelpService,
         private _colorService: ColorService) { }

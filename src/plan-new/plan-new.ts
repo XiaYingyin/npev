@@ -7,6 +7,7 @@ import {SqlService} from '../services/sql-service';
 @Component({
     selector: 'plan-new',
     templateUrl: './plan-new.html',
+    styleUrls: ['./plan-new.css'],
     providers: [PlanService, SqlService],
 })
 export class PlanNew {

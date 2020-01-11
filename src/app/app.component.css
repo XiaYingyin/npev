@@ -1,0 +1,11 @@
+.container {
+    display: grid;
+  }
+  
+  .left-half {
+    grid-column: 1 / 2;
+  }
+  
+  .right-half {
+    grid-column: 2 / 4;
+  }

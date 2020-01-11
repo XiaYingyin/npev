@@ -7,6 +7,7 @@ import {IPlan, PlanService} from '../services/plan-service';
 @Component({
     selector: 'plan-list',
     templateUrl: './plan-list.html',
+    styleUrls: ['./plan-list.css'],
     providers: [PlanService]
 })
 export class PlanList {

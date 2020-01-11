@@ -9,6 +9,7 @@ import {SyntaxHighlightService} from '../services/syntax-highlight-service';
 @Component({
     selector: 'plan-view',
     templateUrl: './plan-view.html',
+    styleUrls: ['./plan-view.css'],
     providers: [PlanService, SyntaxHighlightService],
     //pipes: [DurationPipe, DurationUnitPipe]
 })

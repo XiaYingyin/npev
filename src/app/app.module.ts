@@ -18,6 +18,10 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { AppBootstrapModule } from './app-bootstrap.module';
 import { HomeComponent } from '../home/home.component';
+import { PerfTestComponent } from '../perf-test/perf-test.component';
+import { ExtensionComponent } from '../extension/extension.component';
+import { LeftPanelComponent } from '../left-panel/left-panel.component';
+import { RightPanelComponent } from '../right-panel/right-panel.component';
 
 @NgModule({
    declarations: [
@@ -32,7 +36,11 @@ import { HomeComponent } from '../home/home.component';
       PlanNode,
       NavbarComponent,
       FooterComponent,
-      HomeComponent
+      HomeComponent,
+      PerfTestComponent,
+      ExtensionComponent,
+      LeftPanelComponent,
+      RightPanelComponent
    ],
    imports: [
       BrowserModule,

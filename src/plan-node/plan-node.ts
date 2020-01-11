@@ -13,6 +13,7 @@ import * as _ from 'lodash';
     //inputs: ['plan', 'node', 'viewOptions'],
     templateUrl: './plan-node.html',
     providers: [PlanService, SyntaxHighlightService, HelpService, ColorService],
+    styleUrls: ['./plan-node.css']
     //pipes: [DurationPipe, DurationUnitPipe]
 })
 

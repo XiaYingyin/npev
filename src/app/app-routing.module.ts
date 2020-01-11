@@ -6,6 +6,8 @@ import {PlanList} from '../plan-list/plan-list';
 import {PlanNew} from '../plan-new/plan-new';
 import {About} from '../about/about';
 import { HomeComponent } from '../home/home.component'
+import { PerfTestComponent } from "../perf-test/perf-test.component";
+import { ExtensionComponent } from "../extension/extension.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -13,6 +15,8 @@ const routes: Routes = [
   { path: 'plans', component: PlanList},
   { path: 'plans/new', component: PlanNew },
   { path: 'plans/:id', component: PlanView },
+  { path: 'test', component: PerfTestComponent },
+  { path: 'extension', component: ExtensionComponent },
   { path: 'about', component: About}
 ];
 

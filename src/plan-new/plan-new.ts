@@ -25,7 +25,7 @@ export class PlanNew {
         this.validationMessage = 'The string you submitted is null';
         return;
       }
-      this._sqlService.getQueryPlan(this.newPlanQuery).subscribe(res => {
+      this._sqlService.ngetQueryPlan(this.newPlanQuery).subscribe(res => {
         this.newPlanContent = JSON.stringify(res);
         if (this.newPlanContent !== null) {  
           if (!this._planService.isJsonString(this.newPlanContent)) {

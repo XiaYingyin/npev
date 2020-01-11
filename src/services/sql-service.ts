@@ -29,6 +29,14 @@ export class SqlService {
         );
     }
 
+    ngetQueryPlan(query: string): Observable<string> {
+        return this._http.post(this.queryURL, query)
+        .pipe(
+            map((res: string) => { 
+                console.log(res);
+                return res; })
+        )
+    }
     getExtList() {
         return this._http.get<IExtInfo []>(this.extListURL)
     }

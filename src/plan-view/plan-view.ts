@@ -18,6 +18,7 @@ export class PlanView {
     plan: IPlan;
     rootContainer: any;
     hideMenu: boolean = true;
+    editName: string;
 
     viewOptions: any = {
         showPlanStats: true,

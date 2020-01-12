@@ -46,7 +46,7 @@
       </ul>
    </div>
 
-   <div class="page-stretch">
+   <div class="page page-stretch">
       <h2><span *ngIf="!editName">{{plan.name}}</span>
          <input *ngIf="editName" class="input-box input-box-main" type="text" [(ngModel)]="plan.name">
          <button class="btn btn-link btn-lg" (click)="editName = !editName">

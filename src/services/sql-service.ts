@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -6,6 +6,10 @@ import { map } from 'rxjs/operators';
 
 export interface IJSONPlan {
     queryPlanJson: string;
+}
+
+export interface IJSONQuery {
+    query: string;
 }
 
 export interface IExtInfo {
@@ -30,10 +34,15 @@ export class SqlService {
     }
 
     ngetQueryPlan(query: string): Observable<string> {
-        return this._http.post(this.queryURL, query)
+        console.log(query);
+        let params = new HttpParams();
+        params = params.set('query', query);
+        const queryjson = {query: "test"};
+        
+        return this._http.post<string>(this.queryURL, JSON.stringify(queryjson))
         .pipe(
             map((res: string) => { 
-                console.log(res);
+                //console.log(res);
                 return res; })
         )
     }

@@ -3428,7 +3428,7 @@ nav .about {
 .page-stretch {
     padding-top: 10px;
     margin: 25px;
-    width: 1000px;
+    min-width: 1000px;
     min-height: 600px
 }
 
@@ -3500,7 +3500,7 @@ nav .about {
     left: 0;
     z-index: 1040;
     background-color: #000;
-    opacity: 0.1
+    opacity: 0.02
 }
 
 .modal {

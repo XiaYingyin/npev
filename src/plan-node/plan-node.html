@@ -1,13 +1,12 @@
-<div class="plan-node"
-   [class.expanded]="showDetails"
-   [class.compact]="viewOptions.viewMode === viewModes.COMPACT"
+<div class="plan-node" [class.expanded]="showDetails" [class.compact]="viewOptions.viewMode === viewModes.COMPACT"
    [class.dot]="viewOptions.viewMode === viewModes.DOT">
 
    <header (click)="showDetails = !showDetails" tooltip="view node details">
       <h4>{{getNodeName()}}</h4>
       <span *ngIf="viewOptions.viewMode === viewModes.FULL || showDetails">
-         <span class="node-duration">{{node[_planService.ACTUAL_DURATION_PROP] | duration}}<span class="text-muted">{{node[_planService.ACTUAL_DURATION_PROP] | durationUnit}}
-             | </span><strong>{{executionTimePercent}}</strong>
+         <span class="node-duration">{{node[_planService.ACTUAL_DURATION_PROP] | duration}}<span
+               class="text-muted">{{node[_planService.ACTUAL_DURATION_PROP] | durationUnit}}
+               | </span><strong>{{executionTimePercent}}</strong>
             <span class="text-muted">%</span>
          </span>
       </span>
@@ -21,7 +20,8 @@
    <div *ngIf="viewOptions.viewMode === viewModes.FULL">
       <div class="relation-name" *ngIf="node[_planService.RELATION_NAME_PROP]">
          <span class="text-muted">on </span>
-         <span *ngIf="node[_planService.SCHEMA_PROP]">{{node[_planService.SCHEMA_PROP]}}.</span>{{node[_planService.RELATION_NAME_PROP]}}
+         <span
+            *ngIf="node[_planService.SCHEMA_PROP]">{{node[_planService.SCHEMA_PROP]}}.</span>{{node[_planService.RELATION_NAME_PROP]}}
          <span *ngIf="node[_planService.ALIAS_PROP]"> ({{node[_planService.ALIAS_PROP]}})</span>
       </div>
 
@@ -32,11 +32,11 @@
       <div class="relation-name" *ngIf="node[_planService.JOIN_TYPE_PROP]">{{node[_planService.JOIN_TYPE_PROP]}}
          <span class="text-muted">join</span></div>
       <div class="relation-name" *ngIf="node[_planService.INDEX_NAME_PROP]"><span class="text-muted">
-         using</span> {{node[_planService.INDEX_NAME_PROP]}}</div>
+            using</span> {{node[_planService.INDEX_NAME_PROP]}}</div>
       <div class="relation-name" *ngIf="node[_planService.HASH_CONDITION_PROP]"><span class="text-muted">
-         on</span> {{node[_planService.HASH_CONDITION_PROP]}}</div>
+            on</span> {{node[_planService.HASH_CONDITION_PROP]}}</div>
       <div class="relation-name" *ngIf="node[_planService.CTE_NAME_PROP]">
-            <span class="text-muted">CTE</span> {{node[_planService.CTE_NAME_PROP]}}
+         <span class="text-muted">CTE</span> {{node[_planService.CTE_NAME_PROP]}}
       </div>
    </div>
 
@@ -55,13 +55,15 @@
 
    <div class="planner-estimate" *ngIf="shouldShowPlannerEstimate()">
       <span *ngIf="plannerRowEstimateDirection === estimateDirections.over"><strong>over</strong> estimated rows</span>
-      <span *ngIf="plannerRowEstimateDirection === estimateDirections.under"><strong>under</strong> estimated rows</span>
+      <span *ngIf="plannerRowEstimateDirection === estimateDirections.under"><strong>under</strong> estimated
+         rows</span>
       <span> by <strong>{{plannerRowEstimateValue | number}}</strong>x</span>
    </div>
 
    <div *ngIf="showDetails">
       <div *ngIf="getNodeTypeDescription()" class="node-description">
-         <span class="node-type">{{node[_planService.NODE_TYPE_PROP]}} Node</span> <span [innerHtml]="getNodeTypeDescription()"></span>
+         <span class="node-type">{{node[_planService.NODE_TYPE_PROP]}} Node</span> <span
+            [innerHtml]="getNodeTypeDescription()"></span>
       </div>
 
       <table class="table prop-list">
@@ -83,7 +85,7 @@
 </div>
 
 <ul *ngIf="node.Plans">
-  <li *ngFor="let subNode of node.Plans">
-    <plan-node [plan]="plan" [node]="subNode" [viewOptions]="viewOptions" ></plan-node>
-  </li>
+   <li *ngFor="let subNode of node.Plans">
+      <plan-node [plan]="plan" [node]="subNode" [viewOptions]="viewOptions"></plan-node>
+   </li>
 </ul>

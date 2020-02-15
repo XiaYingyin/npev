@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IExtInfo, SqlService } from "../services/sql-service";
+import { IExtInfo, SqlService } from "../../services/sql-service";
 
 @Component({
   selector: 'app-extension',
@@ -16,13 +16,8 @@ export class ExtensionComponent implements OnInit {
   ngOnInit() {
     this._sqlService.getExtList().subscribe((data: IExtInfo []) => {
       this.extInfoList = { ...data };
-      console.log(this.extInfoList);
-      // this.extInfoList.forEach((element) => {
-      //   console.log(element);
-      //   this.extNameList.push(element.name);
-      // });
       for (const [n, o] of Object.entries(this.extInfoList)) {
-        console.log(o.name);
+        //console.log(o.name);
         this.extNameList.push(o.name);
       }
     })

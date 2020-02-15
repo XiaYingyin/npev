@@ -3372,12 +3372,12 @@ nav .about {
     position: absolute;
     font-size: 12px;
     top: 115px;
-    right: 0;
+    left: 0;
     background-color: #777;
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
     color: #fff;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
     z-index: 1
 }
 
@@ -3410,8 +3410,8 @@ nav .about {
 .menu-hidden {
     width: 45px;
     height: 45px;
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%
 }
 
 .menu-hidden ul,

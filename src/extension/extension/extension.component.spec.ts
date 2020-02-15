@@ -2,7 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { PlanService } from "../services/plan-service";
+import { PlanService } from "../../services/plan-service";
 import { ExtensionComponent } from "./extension.component";
 
 describe('ExtensionComponent', () => {

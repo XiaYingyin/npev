@@ -39,10 +39,10 @@ import { PerfTestComponent } from '../perf-test/perf-test.component';
    imports: [
       BrowserModule,
       ReactiveFormsModule,
-      AppRoutingModule,
       FormsModule,
       HttpClientModule,
-      AppBootstrapModule
+      AppBootstrapModule,
+      AppRoutingModule
    ],
    bootstrap: [
       AppComponent

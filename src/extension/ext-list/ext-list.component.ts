@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IExtInfo, SqlService } from "../../services/sql-service";
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ext-list',
@@ -10,7 +13,8 @@ import { IExtInfo, SqlService } from "../../services/sql-service";
 export class ExtListComponent implements OnInit {
   extInfoList: IExtInfo [];
   extNameList: string [] = [];
-  constructor(private _sqlService: SqlService) { }
+  extensions$: Observable<IExtInfo []>;
+  constructor(private _sqlService: SqlService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this._sqlService.getExtList().subscribe((data: IExtInfo []) => {
@@ -20,6 +24,11 @@ export class ExtListComponent implements OnInit {
         this.extNameList.push(o.name);
       }
     })
+    this.extensions$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        return this._sqlService.getExtList();
+      })
+    )
   }
 
   deleteExtesion() {

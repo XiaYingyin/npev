@@ -16,9 +16,9 @@
 
     <div class="pre-scrollable">
       <ul class="ext">
-        <li *ngFor="let ext of extNameList; let i=index">
-          <a routerLink="{{ext}}">
-            <span class="badge">{{i+1}}</span> {{ext}}
+        <li *ngFor="let ext of extensions$ | async; let i=index">
+          <a routerLink="{{ext.name}}">
+            <span class="badge">{{i+1}}</span> {{ext.name}}
           </a>
           <button class="delete" title="delete ext" (click)="deleteExtesion()">x</button> 
         </li>

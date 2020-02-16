@@ -14,6 +14,7 @@ export interface IJSONQuery {
 
 export interface IExtInfo {
     name: string;
+    type: number;
     version: string;
     schema: string;
     description: string;

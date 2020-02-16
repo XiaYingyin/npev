@@ -8,15 +8,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 import { ExtensionComponent } from './extension/extension.component';
-import { ExtContentComponent } from './ext-content/ext-content.component';
 import { ExtHomeComponent } from './ext-home/ext-home.component';
 import { ExtensionRoutingModule } from './extension-routing.module';
+import { ExtDetailComponent } from './ext-detail/ext-detail.component';
+import { ExtListComponent } from './ext-list/ext-list.component';
 
 @NgModule({
    declarations: [
-      ExtContentComponent,
       ExtHomeComponent,
-      ExtensionComponent
+      ExtensionComponent,
+      ExtDetailComponent,
+      ExtListComponent
    ],
    imports: [
       CommonModule,

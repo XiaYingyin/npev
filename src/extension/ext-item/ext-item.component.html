@@ -1,0 +1,14 @@
+<table class="table">
+  <tr *ngFor="let ext of extNameList; let i=index">
+    <td width="10%">{{i+1}}</td>
+    <td width="45%">
+      {{ext}}
+    </td>
+    <td width="45%">
+      <div class="btn-group btn-xs">
+        <button type="button" (click)="getExtDetail(ext)" class="btn btn-mini btn-info">Check</button>
+        <button type="button" (click)="deleteExtesion()" class="btn btn-mini btn-danger">Delete</button>
+      </div>  
+    </td>
+  </tr>
+</table>

@@ -19,12 +19,6 @@ import { FooterComponent } from '../footer/footer.component';
 import { AppBootstrapModule } from './app-bootstrap.module';
 import { HomeComponent } from '../home/home.component';
 import { PerfTestComponent } from '../perf-test/perf-test.component';
-import { ExtensionComponent } from '../extension/extension/extension.component';
-import { LeftPanelComponent } from '../left-panel/left-panel.component';
-import { RightPanelComponent } from '../right-panel/right-panel.component';
-import { ExtContentComponent } from '../extension/ext-content/ext-content.component';
-import { ExtHomeComponent } from '../extension/ext-home/ext-home.component';
-import { ExtensionRoutingModule } from '../extension/extension-routing.module';
 
 @NgModule({
    declarations: [

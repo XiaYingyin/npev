@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { IExtInfo, SqlService } from "../../services/sql-service";
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-extension',
-  templateUrl: './extension.component.html',
-  styleUrls: ['./extension.component.css'],
+  selector: 'app-ext-list',
+  templateUrl: './ext-list.component.html',
+  styleUrls: ['./ext-list.component.css'],
   providers: [SqlService]
 })
-
-export class ExtensionComponent implements OnInit {
+export class ExtListComponent implements OnInit {
   extInfoList: IExtInfo [];
   extNameList: string [] = [];
   constructor(private _sqlService: SqlService) { }

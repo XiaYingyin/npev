@@ -1,0 +1,35 @@
+<div class="wrapper">
+  <!-- Sidebar  -->
+  <nav id="sidebar">
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Extensions</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01">
+            <option value="0" selected>All extensions</option>
+            <option value="1">Index Scan extensions</option>
+            <option value="2">Table Scan extensions</option>
+            <option value="3">Function Scan extensions</option>
+          </select>
+        </div>
+
+    <div class="pre-scrollable">
+      <ul class="ext">
+        <li *ngFor="let ext of extNameList; let i=index">
+          <a routerLink="{{ext}}">
+            <span class="badge">{{i+1}}</span> {{ext}}
+          </a>
+          <button class="delete" title="delete ext" (click)="deleteExtesion()">x</button> 
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Content  -->
+  <div id="content">
+    
+      <router-outlet></router-outlet>
+    
+  </div>
+</div>

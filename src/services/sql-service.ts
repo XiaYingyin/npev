@@ -19,22 +19,26 @@ export interface IExtInfo {
     description: string;
 }
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
+
 export class SqlService {
     private queryURL: string = 'http://localhost:8080/query/';
-    private extListURL: string = 'http://localhost:8080/extensions';
+    private extListURL: string = 'http://localhost:8080/extension/';
+    private extDetailURL: string = 'http://localhost:8080/extension/'
     constructor(private _http: HttpClient) { }
     getQueryPlan(query: string): Observable<string> {
         return this._http.get(this.queryURL + query)
         .pipe(
             map((res: string) => { 
-                console.log(res);
+                //console.log(res);
                 return res; })
         );
     }
 
     ngetQueryPlan(query: string): Observable<string> {
-        console.log(query);
+        //console.log(query);
         let params = new HttpParams();
         params = params.set('query', query);
         const queryjson = {query: "test"};
@@ -48,5 +52,9 @@ export class SqlService {
     }
     getExtList() {
         return this._http.get<IExtInfo []>(this.extListURL)
+    }
+
+    getExtDetail(extname: string) {
+        return this._http.get<IExtInfo>(this.extDetailURL + extname);
     }
 }

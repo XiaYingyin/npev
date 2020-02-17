@@ -28,7 +28,7 @@ const eroutes: Routes = [
   imports: [
     RouterModule.forRoot(eroutes,
       {
-        enableTracing: true, // <-- debugging purposes only
+        enableTracing: false, // <-- debugging purposes only
         preloadingStrategy: PreloadAllModules
       })
   ],

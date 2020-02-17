@@ -51,6 +51,7 @@ export class SqlService {
                 return res; })
         )
     }
+    
     getExtList() {
         return this._http.get<IExtInfo []>(this.extListURL)
     }

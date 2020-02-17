@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule, Input } from '@angular/core';
 import { IExtInfo, SqlService } from "../../services/sql-service";
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,12 @@ export class ExtListComponent implements OnInit {
   extInfoList: IExtInfo [];
   extNameList: string [] = [];
   extensions$: Observable<IExtInfo []>;
+  extType: number = 0;
+  extTypeList = [
+    {id: 1, name: "Index Scan extensions"},
+    {id: 2, name: "Table Scan extensions"},
+    {id: 3, name: "Function Scan extensions"}
+  ]
   constructor(private _sqlService: SqlService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -29,6 +35,11 @@ export class ExtListComponent implements OnInit {
         return this._sqlService.getExtList();
       })
     )
+  }
+
+  getChange(formValue: any) { 
+    this.extType = formValue;
+    console.log(formValue);
   }
 
   deleteExtesion() {

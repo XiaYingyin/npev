@@ -12,16 +12,22 @@ import { ExtHomeComponent } from './ext-home/ext-home.component';
 import { ExtensionRoutingModule } from './extension-routing.module';
 import { ExtDetailComponent } from './ext-detail/ext-detail.component';
 import { ExtListComponent } from './ext-list/ext-list.component';
+import { ExtSelectComponent } from './ext-select/ext-select.component';
+import { ExtIntroComponent } from './ext-intro/ext-intro.component';
 
 @NgModule({
    declarations: [
       ExtHomeComponent,
       ExtensionComponent,
       ExtDetailComponent,
-      ExtListComponent
+      ExtListComponent,
+      ExtSelectComponent,
+      ExtIntroComponent
    ],
    imports: [
       CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
       ExtensionRoutingModule
    ]
 })

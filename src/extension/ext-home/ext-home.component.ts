@@ -14,7 +14,8 @@ export class ExtHomeComponent implements OnInit {
   extInfoList: IExtInfo [];
   extNameList: string [] = [];
   extensions$: Observable<IExtInfo []>;
-  extType: number = 0;
+  //@Input() extType: number = 0;
+  _extType: number = 0;
   extTypeList = [
     {id: 1, name: "Index Scan extensions"},
     {id: 2, name: "Table Scan extensions"},
@@ -38,7 +39,7 @@ export class ExtHomeComponent implements OnInit {
   }
 
   getChange(formValue: any) { 
-    this.extType = formValue;
+    this._extType = formValue;
     console.log(formValue);
   }
 

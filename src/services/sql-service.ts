@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -25,9 +25,10 @@ export interface IExtInfo {
 })
 
 export class SqlService {
+    selectEvent: EventEmitter<number> = new EventEmitter();
     private queryURL: string = 'http://localhost:8080/query/';
-    private extListURL: string = 'http://localhost:8080/extension/';
-    private extDetailURL: string = 'http://localhost:8080/extension/'
+    private extListURL: string = 'http://localhost:8088/extension/';
+    private extDetailURL: string = 'http://localhost:8088/extension/'
     constructor(private _http: HttpClient) { }
     getQueryPlan(query: string): Observable<string> {
         return this._http.get(this.queryURL + query)
@@ -51,12 +52,18 @@ export class SqlService {
                 return res; })
         )
     }
-    
+
     getExtList() {
+        console.log("line 57");
         return this._http.get<IExtInfo []>(this.extListURL)
     }
 
     getExtDetail(extname: string) {
         return this._http.get<IExtInfo>(this.extDetailURL + extname);
+    }
+
+    extListFilter(extType: number) {
+        console.log(extType);
+        return this._http.get<IExtInfo []>(this.extListURL + "type/" + extType.toString());
     }
 }

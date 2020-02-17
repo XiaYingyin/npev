@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IExtInfo, SqlService } from "../../services/sql-service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-ext-detail',

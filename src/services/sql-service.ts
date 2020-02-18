@@ -26,9 +26,9 @@ export interface IExtInfo {
 
 export class SqlService {
     selectEvent: EventEmitter<number> = new EventEmitter();
-    private queryURL: string = 'http://localhost:8080/query/';
-    private extListURL: string = 'http://localhost:8088/extension/';
-    private extDetailURL: string = 'http://localhost:8088/extension/'
+    private queryURL: string = 'http://10.77.110.134:8080/query/';
+    private extListURL: string = 'http://10.77.110.134:8080/extension/list';
+    private extDetailURL: string = 'http://10.77.110.134:8080/extension/'
     constructor(private _http: HttpClient) { }
     getQueryPlan(query: string): Observable<string> {
         return this._http.get(this.queryURL + query)
@@ -53,17 +53,37 @@ export class SqlService {
         )
     }
 
+    /*
+        SELECT e.extname AS \"%s\", "
+             "e.extversion AS \"%s\", n.nspname AS \"%s\", c.description AS \"%s\"\n"
+             "FROM pg_catalog.pg_extension e "
+             "LEFT JOIN pg_catalog.pg_namespace n ON n.oid = e.extnamespace "
+             "LEFT JOIN pg_catalog.pg_description c ON c.objoid = e.oid "
+             "AND c.classoid = 'pg_catalog.pg_extension'::pg_catalog.regclass
+    */
     getExtList() {
-        console.log("line 57");
         return this._http.get<IExtInfo []>(this.extListURL)
     }
 
+    /*
+    1. get extension oid
+    SELECT e.extname, e.oid FROM pg_catalog.pg_extension e
+
+    2. get extension content by oid
+     SELECT pg_catalog.pg_describe_object(classid, objid, 0) AS "Object description"
+     FROM pg_catalog.pg_depend
+     WHERE refclassid = 'pg_catalog.pg_extension'::pg_catalog.regclass AND refobjid = '$oid' AND deptype = 'e'
+     ORDER BY 1;
+    */
     getExtDetail(extname: string) {
         return this._http.get<IExtInfo>(this.extDetailURL + extname);
     }
 
     extListFilter(extType: number) {
-        console.log(extType);
-        return this._http.get<IExtInfo []>(this.extListURL + "type/" + extType.toString());
+        let params = new HttpParams();
+        params = params.set('type', extType.toString());
+        //return this._http.get<IExtInfo []>(this.extListURL + "type/" + extType.toString());
+        return this._http.get<IExtInfo []>(this.extListURL, { params });
     }
+
 }

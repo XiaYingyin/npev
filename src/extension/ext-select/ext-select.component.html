@@ -3,7 +3,7 @@
     <label class="input-group-text" for="inputGroupSelect01">Extensions</label>
   </div>
   <select class="custom-select" id="inputGroupSelect01" name="extType" (change)="getChange($event.target.value)" ngModel>
-    <option value="" selected>All extensions</option>
+    <!-- <option value="" selected>All extensions</option> -->
     <option *ngFor="let exttype of extTypeList" [ngValue]="exttype.id">
       {{exttype.name}}
     </option>

@@ -11,6 +11,7 @@ import { ExtListFilterService } from '../ext-list-filter.service';
 export class ExtSelectComponent implements OnInit {
   extType: number = 0;
   extTypeList = [
+    {id: 0, name: "All extensions"},
     {id: 1, name: "Index Scan extensions"},
     {id: 2, name: "Table Scan extensions"},
     {id: 3, name: "Function Scan extensions"}

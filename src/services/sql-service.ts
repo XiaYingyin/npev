@@ -81,7 +81,7 @@ export class SqlService {
 
     extListFilter(extType: number) {
         let params = new HttpParams();
-        params = params.set('type', extType.toString());
+        params = params.set('type', String(extType));
         //return this._http.get<IExtInfo []>(this.extListURL + "type/" + extType.toString());
         return this._http.get<IExtInfo []>(this.extListURL, { params });
     }

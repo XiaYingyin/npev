@@ -15,7 +15,7 @@ export class ExtensionComponent implements OnInit {
   constructor(private _sqlService: SqlService) { }
 
   ngOnInit() {
-    this._sqlService.getExtList().subscribe((data: IExtInfo []) => {
+    this._sqlService.extListFilter(0).subscribe((data: IExtInfo []) => {
       this.extInfoList = { ...data };
       for (const [n, o] of Object.entries(this.extInfoList)) {
         //console.log(o.name);

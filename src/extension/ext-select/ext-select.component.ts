@@ -11,7 +11,7 @@ import { ExtListFilterService } from '../ext-list-filter.service';
 export class ExtSelectComponent implements OnInit {
   extType: number = 0;
   extTypeList = [
-    {id: 0, name: "All extensions"},
+    //{id: 0, name: "All extensions"},
     {id: 1, name: "Index Scan extensions"},
     {id: 2, name: "Table Scan extensions"},
     {id: 3, name: "Function Scan extensions"}
@@ -25,9 +25,8 @@ export class ExtSelectComponent implements OnInit {
   }
 
   getChange(formValue: any) { 
-    this.extType = formValue;
-    //console.log(formValue);
+    this.extType = +String(formValue).substring(0, 1);
+    console.log(this.extType);
     this.sqlService.selectEvent.emit(this.extType);
-    console.log(formValue);
   }
 }

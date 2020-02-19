@@ -1,12 +1,23 @@
 <div *ngIf="extInfo">
   <div class="card">
-    <h5 class="card-header h5">{{ extName }}</h5>
+    <h5 class="card-header h5">{{ extInfo.name }}</h5>
     <div class="card-body">
       <h5 class="card-title">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
         {{ extInfo.description }}
       </h5>
-      <!-- <a [routerLink]="['/extension/, extName']" class="btn btn-primary">Refresh</a> -->
+    </div>
+  </div>
+  <div class="card">
+    <h5 class="card-header h5">Test {{ extInfo.name }}'s Performance</h5>
+    <div class="card-body">
+      
     </div>
   </div>
 </div>
+
 

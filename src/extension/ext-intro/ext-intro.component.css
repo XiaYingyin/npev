@@ -3,3 +3,11 @@
 .pre-scrollable {
     max-height: 85vh;
 }
+
+.card {
+    margin: 15px;
+}
+
+p {
+    font-family: Lato;
+  }

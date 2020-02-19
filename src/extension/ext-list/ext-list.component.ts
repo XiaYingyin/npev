@@ -13,7 +13,7 @@ import { ExtListFilterService } from '../ext-list-filter.service';
 })
 export class ExtListComponent implements OnInit {
   extInfoList: IExtInfo [];
-  //extNameList: string [] = [];
+  extNameList: string [] = [];
   extensions$: Observable<IExtInfo []>;
   filteredExtensions$: Observable<IExtInfo []>;
   // extTypeList = [
@@ -25,14 +25,22 @@ export class ExtListComponent implements OnInit {
 
   // }
   constructor(private _sqlService: SqlService, 
-              private extListFilterService: ExtListFilterService, 
+              /*private extListFilterService: ExtListFilterService, */
               private route: ActivatedRoute) { 
                 this.extensions$ = this.route.paramMap.pipe(
                   switchMap(params => {
-                    return this._sqlService.getExtList();
+                    return this._sqlService.extListFilter(0);
                   })
                 )
-            
+                this._sqlService.extListFilter(0).subscribe((data: IExtInfo []) => {
+                  this.extInfoList = { ...data };
+                  for (const [n, o] of Object.entries(this.extInfoList)) {
+                    console.log(o.name);
+                    console.log("line 39");
+                    //const t = JSON.stringify(o);
+                    this.extNameList.push(o.name);
+                  }
+                })
                 this._sqlService.selectEvent.subscribe(
                   // params => 
                   //   this.extensions$ = this._sqlService.extListFilter(params),
@@ -41,8 +49,7 @@ export class ExtListComponent implements OnInit {
                   params => {
                     console.log(params);
                     this.extensions$ = this._sqlService.extListFilter(params);
-                  }
-                    
+                  } 
                 );
             
                 console.log("test");
@@ -52,8 +59,8 @@ export class ExtListComponent implements OnInit {
     // this._sqlService.getExtList().subscribe((data: IExtInfo []) => {
     //   this.extInfoList = { ...data };
     //   for (const [n, o] of Object.entries(this.extInfoList)) {
-    //     //console.log(o.name);
-    //     //this.extNameList.push(o.name);
+    //     console.log(o.name);
+    //     this.extNameList.push(o.name);
     //   }
     // })
     

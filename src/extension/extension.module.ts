@@ -14,6 +14,8 @@ import { ExtDetailComponent } from './ext-detail/ext-detail.component';
 import { ExtListComponent } from './ext-list/ext-list.component';
 import { ExtSelectComponent } from './ext-select/ext-select.component';
 import { ExtIntroComponent } from './ext-intro/ext-intro.component';
+import { ExtChartComponent } from './ext-chart/ext-chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
    declarations: [
@@ -22,13 +24,15 @@ import { ExtIntroComponent } from './ext-intro/ext-intro.component';
       ExtDetailComponent,
       ExtListComponent,
       ExtSelectComponent,
-      ExtIntroComponent
+      ExtIntroComponent,
+      ExtChartComponent
    ],
    imports: [
       CommonModule,
       FormsModule,
       ReactiveFormsModule,
-      ExtensionRoutingModule
+      ExtensionRoutingModule,
+      ChartsModule
    ]
 })
 export class ExtensionModule { }

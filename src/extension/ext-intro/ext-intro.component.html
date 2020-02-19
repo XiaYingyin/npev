@@ -1,32 +1,49 @@
 <div class="pre-scrollable">
-  <div class="card">
-    <h5 class="card-header h5">Extensions Detail</h5>
+  <div class="card text-left">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active">Introduction</a>
+        </li>
+      </ul>
+    </div>
     <div class="card-body">
-      <h5 class="card-title">
-        Here display the detail information of extensions.
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      </h5>
-      <a [routerLink]="['/extension']" class="btn btn-primary">Refresh</a>
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+  
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active">Performance</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <!-- <h5 class="card-title">Special title treatment</h5> -->
+      <nav class="navbar navbar-light bg-light row">
+        
+          <div class="input-group col-md-6">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Extensions</label>
+            </div>
+              <select class="custom-select" id="inputGroupSelect01" name="extTypeSel" #s (change)="getChange(s.value)" ngModel>
+                <option value="" selected>All extensions</option>
+                <option *ngFor="let exttype of extTypeList" [ngValue]="exttype.id">
+                  {{exttype.name}}
+                </option>
+              </select>
+          </div>
+          <form class="form-inline col-md-6">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        
+      </nav>
+      <app-ext-chart></app-ext-chart>
     </div>
   </div>
 </div>

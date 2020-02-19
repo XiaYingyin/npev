@@ -26,10 +26,12 @@ export interface IExtInfo {
 
 export class SqlService {
     selectEvent: EventEmitter<number> = new EventEmitter();
-    private queryURL: string = 'http://10.77.110.134:8080/query/';
+    private basicURL: string = 'http://localhost:8080';
+    //private queryURL: string = 'http://10.77.110.134:8080/query/';
     private extListURL: string = 'http://10.77.110.134:8080/extension/list';
-    private extDetailURL: string = 'http://10.77.110.134:8080/extension/'
-    constructor(private _http: HttpClient) { }
+    
+    constructor(private _http: HttpClient) { 
+    }
     getQueryPlan(query: string): Observable<string> {
         return this._http.get(this.queryURL + query)
         .pipe(
@@ -39,13 +41,14 @@ export class SqlService {
         );
     }
 
+    private queryURL: string = '/query/';
     ngetQueryPlan(query: string): Observable<string> {
         //console.log(query);
         let params = new HttpParams();
         params = params.set('query', query);
-        const queryjson = {query: "test"};
+        const queryjson = {query: query.toString()};
         
-        return this._http.post<string>(this.queryURL, JSON.stringify(queryjson))
+        return this._http.get<string>(this.basicURL + this.queryURL, { params })
         .pipe(
             map((res: string) => { 
                 //console.log(res);
@@ -75,15 +78,16 @@ export class SqlService {
      WHERE refclassid = 'pg_catalog.pg_extension'::pg_catalog.regclass AND refobjid = '$oid' AND deptype = 'e'
      ORDER BY 1;
     */
+   private extDetailURL: string = '/extension/list/';
     getExtDetail(extname: string) {
-        return this._http.get<IExtInfo>(this.extDetailURL + extname);
+        return this._http.get<IExtInfo>(this.basicURL + this.extDetailURL + extname);
     }
-
+    
+    private extListFilterURL: string = "/extension/list"
     extListFilter(extType: number) {
         let params = new HttpParams();
         params = params.set('type', String(extType));
         //return this._http.get<IExtInfo []>(this.extListURL + "type/" + extType.toString());
-        return this._http.get<IExtInfo []>(this.extListURL, { params });
+        return this._http.get<IExtInfo []>(this.basicURL + this.extListFilterURL, { params });
     }
-
 }

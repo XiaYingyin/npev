@@ -1,12 +1,11 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { SqlService } from '../../services/sql-service';
-import { ExtListFilterService } from '../ext-list-filter.service';
+//import { ExtListFilterService } from '../ext-list-filter.service';
 
 @Component({
   selector: 'app-ext-select',
   templateUrl: './ext-select.component.html',
-  styleUrls: ['./ext-select.component.css'],
-  //providers: [SqlService]
+  styleUrls: ['./ext-select.component.css']
 })
 export class ExtSelectComponent implements OnInit {
   extType: number = 0;

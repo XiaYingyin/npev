@@ -32,15 +32,15 @@ export class ExtListComponent implements OnInit {
                     return this._sqlService.extListFilter(0);
                   })
                 )
-                this._sqlService.extListFilter(0).subscribe((data: IExtInfo []) => {
-                  this.extInfoList = { ...data };
-                  for (const [n, o] of Object.entries(this.extInfoList)) {
-                    console.log(o.name);
-                    console.log("line 39");
-                    //const t = JSON.stringify(o);
-                    this.extNameList.push(o.name);
-                  }
-                })
+                // this._sqlService.extListFilter(0).subscribe((data: IExtInfo []) => {
+                //   this.extInfoList = { ...data };
+                //   for (const [n, o] of Object.entries(this.extInfoList)) {
+                //     console.log(o.name);
+                //     console.log("line 39");
+                //     //const t = JSON.stringify(o);
+                //     this.extNameList.push(o.name);
+                //   }
+                // })
                 this._sqlService.selectEvent.subscribe(
                   // params => 
                   //   this.extensions$ = this._sqlService.extListFilter(params),

@@ -25,6 +25,16 @@ export interface runTime {
     time: number;
 }
 
+export interface BarChartData {
+    data: number [];
+    label: string;
+}
+
+export interface BarChartDataSet {
+    barChartLabels: string [];
+    barChartData: BarChartData [];
+}
+
 @Injectable({
     providedIn: 'root',
 })

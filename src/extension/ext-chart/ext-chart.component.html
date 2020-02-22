@@ -1,4 +1,4 @@
-<div *ngIf="displayFlag" style="display: block;">
+<div style="display: block;" *ngIf="displayFlag; else elseBlock">
   <canvas baseChart 
     [datasets]="barChartData"
     [labels]="barChartLabels"
@@ -8,3 +8,26 @@
     [chartType]="barChartType">
   </canvas>
 </div>
+<ng-template #elseBlock>
+  <div align="center">
+    <div class="card text-center">
+      <div class="card-body">
+        <p class="card-text">
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+        </p>
+        <h5 class="card-text">There are no test data!</h5>
+        <p class="card-text">
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-template>

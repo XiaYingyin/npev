@@ -19,6 +19,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { AppBootstrapModule } from './app-bootstrap.module';
 import { HomeComponent } from '../home/home.component';
 import { PerfTestComponent } from '../perf-test/perf-test.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
    declarations: [
@@ -42,7 +43,8 @@ import { PerfTestComponent } from '../perf-test/perf-test.component';
       FormsModule,
       HttpClientModule,
       AppBootstrapModule,
-      AppRoutingModule
+      AppRoutingModule,
+      BrowserAnimationsModule
    ],
    bootstrap: [
       AppComponent

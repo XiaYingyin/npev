@@ -13,7 +13,7 @@
       <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   </div>
-  <div *ngIf="extInfo.type !== 1">
+  <div *ngIf="extInfo.type !== 3">
     <div class="card text-center">
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
@@ -26,26 +26,48 @@
         <!-- <h5 class="card-title">Special title treatment</h5> -->
         <nav class="navbar navbar-light bg-light row">
           <div class="container">
-            <div class="input-group col-md-6">
+            <!-- <div class="input-group col-md-6">
               <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">{{ extInfo.name }}</label>
               </div>
               <button type="button" class="btn btn-primary" (click)="onClick($event)">Test it again!</button>
-            </div>
+            </div> -->
             <form class="form-inline col-md-6">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Compare</button>
+              <input class="form-control mr-sm-2" type="search" placeholder="Extension" aria-label="Search">
+              <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Compare</button> -->
+              <button type="button" class="btn btn-primary" (click)="onClick($event)">Test or Compare</button>
             </form>
-            
           </div>
-            
         </nav>
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+
+        <div *ngIf="!testComplete; else elseBlock">
+          <div class="card text-center">
+            <div class="card-body">
+              <p class="card-text">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </p>
+              <div align="center">
+                <mat-spinner></mat-spinner>
+              </div>
+              <p class="card-text">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </p>
+            </div>
+          </div>
         </div>
-        <app-ext-chart [barChartData]="chartDataJson" [barChartLabels]="chartLabelsJson"></app-ext-chart>
+        <ng-template #elseBlock>
+          <app-ext-chart [barChartData]="barChartDataSet" [barChartLabels]="barChartLabels" [extName]="extInfo.name">
+          </app-ext-chart>
+        </ng-template>
       </div>
     </div>
-  </div>  
   </div>
-  
+</div>

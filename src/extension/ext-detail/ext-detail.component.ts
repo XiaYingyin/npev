@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IExtInfo, SqlService, runTime } from "../../services/sql-service";
+import { IExtInfo, SqlService, runTime, BarChartData } from "../../services/sql-service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -13,50 +13,60 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class ExtDetailComponent implements OnInit {
   extName: string;
   extInfo: IExtInfo;
-  resultSet: runTime[] = [];
-  chartLabels: string [] = [];
-  chartData: number [] = [];
-  chartLabelsJson: any;
-  chartDataJson: any;
-
-  constructor(private route: ActivatedRoute, private router: Router, private sqlService: SqlService) {}
+  extNameList: string [] = [];
+  barChartDataSet: BarChartData [] = [];
+  barChartLabels: string [] = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10', 'Q11', 'Q12', 'Q13', 'Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20', 'Q21', 'Q22'];
+  currentPercentage: string;
+  testComplete: boolean = false;
+  constructor(private route: ActivatedRoute, private router: Router, private sqlService: SqlService) {
+    //this.currentPercentage = '10';
+    
+  }
 
   ngOnInit() {
     this.getExtDetail();
+    this.extNameList.push(this.extInfo.name);
+    
+    // this.sqlService.getTestResult(this.extInfo.name).subscribe((data: BarChartData) => {
+    //   const barChartData = { ...data };
+    //   this.barChartDataSet.push(barChartData);
+    // });
+    
+    this.testComplete = true;
+    // this.sqlService.chartEvent.emit(this.barChartDataSet);
   }
 
   getExtDetail() {
-    // this.extName = this.route.snapshot.paramMap.get('extName');
-    // console.log(this.extName);
-    // //this.extName = "pg_strom";
-    // this._sqlService.getExtDetail(this.extName).subscribe((data: IExtInfo) => {
-    //   this.extInfo = data;
-    // })
     this.route.data
       .subscribe((data: { extInfo: IExtInfo }) => {
         this.extName = data.extInfo.name;
         this.extInfo = data.extInfo;
       });
   }
-
-  onClick(event: Event) {
-    // create table
-    // http
-    this.sqlService.chartEvent.emit(this.extInfo.name);
-    this.sqlService.perfTest(this.extInfo.name).subscribe((data: runTime []) => {
-      this.resultSet = { ...data };
-      for (const [n, o] of Object.entries(this.resultSet)) {
-        //const t = JSON.stringify(o);
-        this.chartLabels.push(o.name);
-        this.chartData.push(o.time);
-      }
+  public async perfTest(): Promise<BarChartData> {
+    return new Promise<BarChartData>( resolve => {
+      //const groups: Array<Node> = [];
+      this.sqlService.perfTest(this.extName).subscribe((data: BarChartData) => {
+        const bcd = { ...data };
+        console.log(bcd);
+        resolve(bcd);
+        return bcd;
+      });
     });
-    this.chartDataJson = [
-      { data: [100, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 33], label: 'Series A' },
-          { data: [28, 48, 40, 19, 86, 27, 90, 28, 48, 40, 19, 86, 27, 90, 28, 48, 40, 19, 86, 27, 90, 23], label: 'Series B' }
-    ];
+  }
 
-    this.chartLabelsJson = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10', 'Q11', 'Q12', 'Q13', 'Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20', 'Q21', 'Q22'];
-    console.log("line 60");
+  async onClick(event: Event) {
+    this.testComplete = false;
+    // this.sqlService.perfTest(this.extInfo.name).subscribe((data: BarChartData) => {
+    //   const barChartData = { ...data };
+    //   if (this.barChartDataSet === null)
+    //     this.barChartDataSet.push(barChartData);
+    // });
+    const barChartData = await this.perfTest();
+    let bcds: BarChartData [] = [];
+    bcds.push(barChartData);
+    this.barChartDataSet = bcds;
+    this.testComplete = true;
+    this.sqlService.chartEvent.emit(this.barChartDataSet);
   }
 }

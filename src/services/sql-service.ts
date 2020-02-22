@@ -30,18 +30,13 @@ export interface BarChartData {
     label: string;
 }
 
-export interface BarChartDataSet {
-    barChartLabels: string [];
-    barChartData: BarChartData [];
-}
-
 @Injectable({
     providedIn: 'root',
 })
 
 export class SqlService {
     selectEvent: EventEmitter<number> = new EventEmitter();
-    chartEvent: EventEmitter<string> = new EventEmitter();
+    chartEvent: EventEmitter<BarChartData []> = new EventEmitter();
 
     private basicURL: string = 'http://localhost:8080';
     //private queryURL: string = 'http://10.77.110.134:8080/query/';
@@ -108,9 +103,18 @@ export class SqlService {
         return this._http.get<IExtInfo []>(this.basicURL + this.extListFilterURL, { params });
     }
 
-    private perfTestURL: string = "/extension/test/";
+    private getTestURL: string = "/extension/test/";
+    getTestResult(extName: string) {
+        this.basicURL = "http://localhost:8080";
+        console.log(extName);
+        return this._http.get<BarChartData>(this.basicURL + this.getTestURL + extName);
+    }
+
+    private perfTestURL: string = "/extension/test";
     perfTest(extName: string) {
-        this.basicURL = "http://localhost:8088"
-        return this._http.get<runTime []>(this.basicURL + this.perfTestURL + extName);
+        this.basicURL = "http://localhost:8080"
+        let params = new HttpParams();
+        params = params.set('name', extName);
+        return this._http.get<BarChartData>(this.basicURL + this.perfTestURL, {params});
     }
 }

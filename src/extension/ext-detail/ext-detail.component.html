@@ -8,9 +8,55 @@
       </ul>
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ extInfo.name }}</h5>
-      <p class="card-text">{{ extInfo.description }}</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <h5 class="card-title">{{ extInfo.name }}  {{extInfo.version}}</h5>
+      <div *ngIf="!ifEdit; else elseBlock">
+        <p class="card-text">{{ extInfo.description }}</p>
+        <button class="btn btn-primary" (click)="editExtDesc()">Edit</button>
+      </div>
+      <ng-template #elseBlock>
+        <div class="input-group">
+          <textarea class="form-control" aria-label="With textarea" ref-textarea [(ngModel)]="DescText" rows=6></textarea>  
+        </div>
+        <br/>
+        <div align="right">
+          <button class="btn btn-primary" type="submit" (click)="saveExtDesc()">Save</button>
+        </div>
+      </ng-template>  
+    </div>
+  </div>
+  <div class="card text-left">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active">Functions</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item">function pg_file_rename(text,text)</li>
+        <li class="list-group-item">function pg_file_rename(text,text,text)</li>
+        <li class="list-group-item">function pg_file_unlink(text)</li>
+        <li class="list-group-item">function pg_file_write(text,text,boolean)</li>
+        <li class="list-group-item">function pg_logdir_ls()</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card text-left">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active">Operators</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item">operator pg_file_rename(text,text,text)</li>
+        <li class="list-group-item">operator pg_file_unlink(text)</li>
+        <li class="list-group-item">operator pg_file_write(text,text,boolean)</li>
+        <li class="list-group-item">operator pg_logdir_ls()</li>
+      </ul>
     </div>
   </div>
   <div *ngIf="extInfo.type !== 3">

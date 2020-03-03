@@ -18,6 +18,8 @@ export class ExtDetailComponent implements OnInit {
   barChartLabels: string [] = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10', 'Q11', 'Q12', 'Q13', 'Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20', 'Q21', 'Q22'];
   currentPercentage: string;
   testComplete: boolean = false;
+  ifEdit: boolean = false;
+  DescText: string;
   constructor(private route: ActivatedRoute, private router: Router, private sqlService: SqlService) {
     //this.currentPercentage = '10';
     
@@ -26,7 +28,7 @@ export class ExtDetailComponent implements OnInit {
   ngOnInit() {
     this.getExtDetail();
     this.extNameList.push(this.extInfo.name);
-    
+    this.DescText = this.extInfo.description;
     // this.sqlService.getTestResult(this.extInfo.name).subscribe((data: BarChartData) => {
     //   const barChartData = { ...data };
     //   this.barChartDataSet.push(barChartData);
@@ -41,6 +43,7 @@ export class ExtDetailComponent implements OnInit {
       .subscribe((data: { extInfo: IExtInfo }) => {
         this.extName = data.extInfo.name;
         this.extInfo = data.extInfo;
+        this.DescText = this.extInfo.description;
       });
   }
   public async perfTest(): Promise<BarChartData> {
@@ -68,5 +71,15 @@ export class ExtDetailComponent implements OnInit {
     this.barChartDataSet = bcds;
     this.testComplete = true;
     this.sqlService.chartEvent.emit(this.barChartDataSet);
+  }
+
+  saveExtDesc() {
+    this.ifEdit = false;
+    this.extInfo.description = this.DescText;
+    // submit new description to backend
+  }
+
+  editExtDesc() {
+    this.ifEdit = true;
   }
 }

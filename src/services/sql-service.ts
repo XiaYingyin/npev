@@ -126,7 +126,13 @@ export class SqlService {
         this.basicURL = "http://localhost:8080";
         let params = new HttpParams();
         params = params.set('description', desc);
-        console.log(desc);
+        //console.log(desc);
         return this._http.patch(this.basicURL + this.updateExtInfoURL + extName, params);
+    }
+
+    private deleteExtURL: string = "/extension/list/";
+    deleteExt(extName: string) {
+        this.basicURL = "http://localhost:8080";
+        return this._http.delete(this.basicURL + this.deleteExtURL + extName);
     }
 }

@@ -66,7 +66,7 @@ export class ExtListComponent implements OnInit {
     
   }
 
-  deleteExtesion() {
-
+  deleteExtesion(name: string) {
+    this._sqlService.deleteExt(name).subscribe();
   }
 }

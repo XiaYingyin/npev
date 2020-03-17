@@ -34,11 +34,7 @@
     </div>
     <div class="card-body">
       <ul class="list-group">
-        <li class="list-group-item">function pg_file_rename(text,text)</li>
-        <li class="list-group-item">function pg_file_rename(text,text,text)</li>
-        <li class="list-group-item">function pg_file_unlink(text)</li>
-        <li class="list-group-item">function pg_file_write(text,text,boolean)</li>
-        <li class="list-group-item">function pg_logdir_ls()</li>
+       <li class="list-group-item" *ngFor="let function of extFuncList">{{function}}</li>
       </ul>
     </div>
   </div>
@@ -52,10 +48,21 @@
     </div>
     <div class="card-body">
       <ul class="list-group">
-        <li class="list-group-item">operator pg_file_rename(text,text,text)</li>
-        <li class="list-group-item">operator pg_file_unlink(text)</li>
-        <li class="list-group-item">operator pg_file_write(text,text,boolean)</li>
-        <li class="list-group-item">operator pg_logdir_ls()</li>
+        <li class="list-group-item" *ngFor="let operator of extOptList">{{operator}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card text-left">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active">Type</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let type of extTypeList">{{type}}</li>
       </ul>
     </div>
   </div>

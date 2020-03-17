@@ -14,6 +14,9 @@ export class ExtDetailComponent implements OnInit {
   extName: string;
   extInfo: IExtInfo;
   extNameList: string [] = [];
+  extFuncList: string [] = [];
+  extOptList: string [] = [];
+  extTypeList: string [] = [];
   barChartDataSet: BarChartData [] = [];
   barChartLabels: string [] = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10', 'Q11', 'Q12', 'Q13', 'Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20', 'Q21', 'Q22'];
   currentPercentage: string;
@@ -44,6 +47,9 @@ export class ExtDetailComponent implements OnInit {
         this.extName = data.extInfo.name;
         this.extInfo = data.extInfo;
         this.DescText = this.extInfo.description;
+        this.extFuncList = this.extInfo.functionList;
+        this.extTypeList = this.extInfo.typeList;
+        this.extOptList = this.extInfo.operatorList;
       });
   }
   public async perfTest(): Promise<BarChartData> {
@@ -77,6 +83,7 @@ export class ExtDetailComponent implements OnInit {
     this.ifEdit = false;
     this.extInfo.description = this.DescText;
     // submit new description to backend
+    this.sqlService.updateExtInfo(this.extName, this.DescText).subscribe();
   }
 
   editExtDesc() {

@@ -18,6 +18,9 @@ export interface IExtInfo {
     version: string;
     schema: string;
     description: string;
+    functionList: string [];
+    operatorList: string [];
+    typeList: string [];
 }
 
 export interface runTime {
@@ -112,9 +115,18 @@ export class SqlService {
 
     private perfTestURL: string = "/extension/test";
     perfTest(extName: string) {
-        this.basicURL = "http://localhost:8080"
+        this.basicURL = "http://localhost:8080";
         let params = new HttpParams();
         params = params.set('name', extName);
         return this._http.get<BarChartData>(this.basicURL + this.perfTestURL, {params});
+    }
+
+    private updateExtInfoURL: string = "/extension/list/";
+    updateExtInfo(extName: string, desc: string) {
+        this.basicURL = "http://localhost:8080";
+        let params = new HttpParams();
+        params = params.set('description', desc);
+        console.log(desc);
+        return this._http.patch(this.basicURL + this.updateExtInfoURL + extName, params);
     }
 }

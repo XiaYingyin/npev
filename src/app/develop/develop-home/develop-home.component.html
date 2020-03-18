@@ -1,0 +1,40 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side" opened>
+        <mat-toolbar style="height: auto; padding: 0px;">
+            <button type="button" mat-button (click)="drawer.toggle()">
+                Toggle
+            </button>
+            <button type="button" mat-button (click)="drawer.toggle()">
+                Build
+            </button>
+        </mat-toolbar>
+
+        <app-explorer></app-explorer>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+        <mat-toolbar style="height: auto; padding: 0px;">
+            <button type="button" mat-button (click)="drawer.toggle()">
+                Toggle
+            </button>
+            <button mat-button [matMenuTriggerFor]="menu">File</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+            </mat-menu>
+            <button mat-button [matMenuTriggerFor]="menu">Setting</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+            </mat-menu>
+        </mat-toolbar>
+        <mat-tab-group dynamicHeight>
+            <mat-tab label="First">
+                <app-editor></app-editor>
+            </mat-tab>
+            
+        </mat-tab-group>
+        
+    </div>
+
+</mat-drawer-container>

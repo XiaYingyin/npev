@@ -34,7 +34,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
       ReactiveFormsModule,
       ExtensionRoutingModule,
       ChartsModule,
-      MatProgressSpinnerModule
+      MatProgressSpinnerModule,
    ]
 })
 export class ExtensionModule { }

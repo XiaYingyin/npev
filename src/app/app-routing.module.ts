@@ -21,6 +21,10 @@ const eroutes: Routes = [
   {
     path: 'extension',
     loadChildren: () => import('../extension/extension.module').then(m => m.ExtensionModule)
+  },
+  {
+    path: 'develop',
+    loadChildren: () => import('./develop/develop.module').then(m => m.DevelopModule)
   }
 ];
 

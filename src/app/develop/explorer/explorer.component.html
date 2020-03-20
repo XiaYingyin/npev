@@ -1,60 +1,66 @@
 <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree" style="height: 100%;">
-    <mat-tree-node *matTreeNodeDef="let node">
-        <span [matMenuTriggerFor]="rootMenu" [matMenuTriggerData]="{node: node}" #menuTrigger="matMenuTrigger"></span>
-        <div fxLayout="column" fxLayoutAlign="space-between center" (contextmenu)="openMenu($event,node, menuTrigger)">
-        <li class="mat-tree-node">
-            
-            <button mat-icon-button (click)="display(node.filename)">
-                <mat-icon>file</mat-icon>
-            </button>
-            {{node.filename}}: {{node.type}}
-        </li>
-        </div>
-    </mat-tree-node>
+  <mat-tree-node *matTreeNodeDef="let node">
+    <span [matMenuTriggerFor]="rootMenu" [matMenuTriggerData]="{node: node}" #menuTrigger="matMenuTrigger"></span>
+    <div fxLayout="column" fxLayoutAlign="space-between center" (contextmenu)="openMenu($event,node, menuTrigger)">
+      <li class="mat-tree-node">
 
-    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
-        <span [matMenuTriggerFor]="rootMenu" [matMenuTriggerData]="{node: node}" #menuTrigger="matMenuTrigger"></span>
-        <div fxLayout="column" fxLayoutAlign="space-between center" (contextmenu)="openMenu($event,node, menuTrigger)">
-        <li>
-           
-            <div class="mat-tree-node">
-                <button mat-icon-button matTreeNodeToggle>
-                    <mat-icon class="mat-icon-rtl-mirror">
-                        {{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                    </mat-icon>
-                    <mat-icon>folder</mat-icon>
-                </button>
-                  {{node.filename}}
-            </div>
-            <ul [class.example-tree-invisible]="!nestedTreeControl.isExpanded(node)">
-                <ng-container matTreeNodeOutlet></ng-container>
-            </ul>
-        </li>
+        <button mat-icon-button (click)="display(node.filename)">
+          <mat-icon>file</mat-icon>
+        </button>
+        {{node.filename}}: {{node.type}}
+      </li>
+    </div>
+  </mat-tree-node>
+
+  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
+    <span [matMenuTriggerFor]="rootMenu" [matMenuTriggerData]="{node: node}" #menuTrigger="matMenuTrigger"></span>
+    <div fxLayout="column" fxLayoutAlign="space-between center" (contextmenu)="openMenu($event,node, menuTrigger)">
+      <li>
+
+        <div class="mat-tree-node">
+          <span style='margin:5px;'>
+            <button mat-icon-button matTreeNodeToggle>
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+              <mat-icon>folder</mat-icon>
+            </button>
+          </span>
+          <span style='margin:5px;'>
+            {{node.filename}}
+          </span>
+
         </div>
-    </mat-nested-tree-node>
+        <ul [class.example-tree-invisible]="!nestedTreeControl.isExpanded(node)">
+          <ng-container matTreeNodeOutlet></ng-container>
+        </ul>
+      </li>
+    </div>
+  </mat-nested-tree-node>
 </mat-tree>
 
 <mat-menu #rootMenu="matMenu" [overlapTrigger]="false">
-    <ng-template matMenuContent let-element="element">
-      <button mat-menu-item [matMenuTriggerFor]="moveToMenu" [matMenuTriggerData]="{self: element}">
-        <mat-icon>open_with</mat-icon>
-        <span>Move To</span>
-      </button>
-      <button mat-menu-item (click)="openRenameDialog(element)">
-        <mat-icon>edit</mat-icon>
-        <span>Rename</span>
-      </button>
-      <button mat-menu-item (click)="deleteElement(element)">
-        <mat-icon>delete</mat-icon>
-        <span>Delete</span>
-      </button>
-    </ng-template>
-  </mat-menu>
-  
-  <mat-menu #moveToMenu="matMenu">
-    <ng-template matMenuContent let-self="self">
-      <ng-container *matTreeNodeDef="let node">
-        <button *ngIf="node.type === 'folder' && node.id !== self.id" mat-menu-item (click)="moveElement(self, node)">{{node.name}}</button>
-      </ng-container>
-    </ng-template>
-  </mat-menu>
+  <ng-template matMenuContent let-element="element">
+    <button mat-menu-item [matMenuTriggerFor]="moveToMenu" [matMenuTriggerData]="{self: element}">
+      <mat-icon>open_with</mat-icon>
+      <span>Move To</span>
+    </button>
+    <button mat-menu-item (click)="openRenameDialog(element)">
+      <mat-icon>edit</mat-icon>
+      <span>Rename</span>
+    </button>
+    <button mat-menu-item (click)="deleteElement(element)">
+      <mat-icon>delete</mat-icon>
+      <span>Delete</span>
+    </button>
+  </ng-template>
+</mat-menu>
+
+<mat-menu #moveToMenu="matMenu">
+  <ng-template matMenuContent let-self="self">
+    <ng-container *matTreeNodeDef="let node">
+      <button *ngIf="node.type === 'folder' && node.id !== self.id" mat-menu-item
+        (click)="moveElement(self, node)">{{node.name}}</button>
+    </ng-container>
+  </ng-template>
+</mat-menu>

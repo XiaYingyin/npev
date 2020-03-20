@@ -43,21 +43,36 @@ export class ExplorerComponent implements OnInit {
 
     this.dataChange.next([
       {
-        filename: "folder",
+        filename: "ftree",
         type: "",
         children: [
           {
-            filename: "test3",
-            type: "exe",
+            filename: "ftree",
+            type: "c",
+            children: [],
+          },
+          {
+            filename: "ftree",
+            type: "control",
+            children: [],
+          },
+          {
+            filename: "Makefile",
+            type: "makefile",
+            children: [],
+          },
+          {
+            filename: "ftree--0.1",
+            type: "sql",
+            children: [],
+          },
+          {
+            filename: "README",
+            type: "md",
             children: [],
           }
-        ],
-      },
-      {
-        filename: "test2",
-        type: "exe",
-        children: [],
-      },
+        ]
+      }
     ]);
   }
 

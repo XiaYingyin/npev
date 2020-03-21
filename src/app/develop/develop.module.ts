@@ -21,6 +21,7 @@ import { NewFolderDialogComponent } from "./explorer/modals/newFolderDialog/newF
 import { RenameDialogComponent } from "./explorer/modals/renameDialog/renameDialog.component";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { MatInputModule } from '@angular/material/input';
     MatTabsModule,
     MatDialogModule,
     MatInputModule,
+    MatListModule,
     CodeEditorModule.forRoot()
   ],
   entryComponents: [NewFolderDialogComponent, RenameDialogComponent]

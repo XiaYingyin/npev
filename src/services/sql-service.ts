@@ -42,25 +42,22 @@ export class SqlService {
     selectEvent: EventEmitter<number> = new EventEmitter();
     chartEvent: EventEmitter<BarChartData []> = new EventEmitter();
 
-    private basicURL: string = 'http://localhost:8080';
-    //private queryURL: string = 'http://10.77.110.134:8080/query/';
-    private extListURL: string = 'http://10.77.110.134:8080/extension/list';
+    private basicURL: string = 'http://localhost:8080';    
     
     constructor(private _http: HttpClient, private cs: ConfigService) { 
         this.basicURL = cs.baseUrl;
     }
+
     getQueryPlan(query: string): Observable<string> {
         return this._http.get(this.queryURL + query)
         .pipe(
             map((res: string) => { 
-                //console.log(res);
                 return res; })
         );
     }
 
     private queryURL: string = '/query/';
     ngetQueryPlan(query: string): Observable<string> {
-        //console.log(query);
         let params = new HttpParams();
         params = params.set('query', query);
         const queryjson = {query: query.toString()};
@@ -81,8 +78,9 @@ export class SqlService {
              "LEFT JOIN pg_catalog.pg_description c ON c.objoid = e.oid "
              "AND c.classoid = 'pg_catalog.pg_extension'::pg_catalog.regclass
     */
+   private extListURL: string = '/extension/list';
     getExtList() {
-        return this._http.get<IExtInfo []>(this.extListURL)
+        return this._http.get<IExtInfo []>(this.basicURL + this.extListURL)
     }
 
     /*
@@ -104,20 +102,17 @@ export class SqlService {
     extListFilter(extType: number) {
         let params = new HttpParams();
         params = params.set('type', String(extType));
-        //return this._http.get<IExtInfo []>(this.extListURL + "type/" + extType.toString());
         return this._http.get<IExtInfo []>(this.basicURL + this.extListFilterURL, { params });
     }
 
     private getTestURL: string = "/extension/test/";
     getTestResult(extName: string) {
-        //this.basicURL = "http://localhost:8080";
         console.log(extName);
         return this._http.get<BarChartData>(this.basicURL + this.getTestURL + extName);
     }
 
     private perfTestURL: string = "/extension/test";
     perfTest(extName: string) {
-        //this.basicURL = "http://localhost:8080";
         let params = new HttpParams();
         params = params.set('name', extName);
         return this._http.get<BarChartData>(this.basicURL + this.perfTestURL, {params});
@@ -125,16 +120,13 @@ export class SqlService {
 
     private updateExtInfoURL: string = "/extension/list/";
     updateExtInfo(extName: string, desc: string) {
-        //this.basicURL = "http://localhost:8080";
         let params = new HttpParams();
         params = params.set('description', desc);
-        //console.log(desc);
         return this._http.patch(this.basicURL + this.updateExtInfoURL + extName, params);
     }
 
     private deleteExtURL: string = "/extension/list/";
     deleteExt(extName: string) {
-        //this.basicURL = "http://localhost:8080";
         return this._http.delete(this.basicURL + this.deleteExtURL + extName);
     }
 }

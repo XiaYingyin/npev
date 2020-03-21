@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, Input } from '@angular/core';
+import { Component, OnInit, NgModule, Input, Output } from '@angular/core';
 import { IExtInfo, SqlService } from "../../services/sql-service";
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -16,6 +16,7 @@ export class ExtListComponent implements OnInit {
   extNameList: string [] = [];
   extensions$: Observable<IExtInfo []>;
   filteredExtensions$: Observable<IExtInfo []>;
+  @Output() selectedRow: string;
   // extTypeList = [
   //   {id: 1, name: "Index Scan extensions"},
   //   {id: 2, name: "Table Scan extensions"},
@@ -64,6 +65,9 @@ export class ExtListComponent implements OnInit {
     //   }
     // })
     
+  }
+  getSelectedRow(name: string) {
+    //console.log(name + " is selected!");
   }
 
   deleteExtesion(name: string) {

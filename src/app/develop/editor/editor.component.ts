@@ -8,7 +8,7 @@ import { hasLifecycleHook } from '@angular/compiler/src/lifecycle_reflector';
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
-  theme = 'vs-dark';
+  theme = 'vs';
 
   model: CodeModel = {
     language: 'c',

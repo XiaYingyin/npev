@@ -4,6 +4,14 @@ import { v4 } from 'uuid';
 import { FileElement } from './explorer/model/file-element';
 import {BehaviorSubject, Observable, of as observableOf} from 'rxjs';
 
+export interface FileNode {
+  children: FileNode[];
+  filename: string;
+  type: string;
+  content: string;
+  suffix: string;
+}
+
 export interface IFileService {
   add(fileElement: FileElement);
   delete(id: string);

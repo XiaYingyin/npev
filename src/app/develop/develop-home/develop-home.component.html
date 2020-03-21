@@ -1,38 +1,55 @@
+<mat-toolbar style="height: auto; padding: 0px;">
+    <button type="button" mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <button mat-button [matMenuTriggerFor]="file">File</button>
+    <mat-menu #file="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="new">New</button>
+        <button mat-menu-item>Open</button>
+        <button mat-menu-item>Save</button>
+        <button mat-menu-item>Save all</button>
+        <button mat-menu-item>Close</button>
+        <button mat-menu-item>Close all</button>
+    </mat-menu>
+
+    <mat-menu #new="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="project">Project...</button>
+        <button mat-menu-item>SQL file</button>
+        <button mat-menu-item>C file</button>
+        <button mat-menu-item>Makefile</button>
+        <button mat-menu-item>Shell script</button>
+    </mat-menu>
+
+    <mat-menu #project="matMenu">
+        <button mat-menu-item>Function Extension</button>
+        <button mat-menu-item>Table Scan Extension</button>
+        <button mat-menu-item>Index Scan Extension</button>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="setting">Setting</button>
+    <mat-menu #setting="matMenu">
+        <button mat-menu-item>Output panel</button>
+        <button mat-menu-item (click)="drawer.toggle()">Explorer panel</button>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="build">
+        Build
+    </button>
+    <mat-menu #build="matMenu">
+        <button mat-menu-item>Build project</button>
+        <button mat-menu-item>Install</button>
+    </mat-menu>
+</mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side" opened>
-        <mat-toolbar style="height: auto; padding: 0px;">
-            <button mat-button [matMenuTriggerFor]="menu">File</button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Item 1</button>
-                <button mat-menu-item>Item 2</button>
-            </mat-menu>
-            <button mat-button [matMenuTriggerFor]="menu">Setting</button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Item 1</button>
-                <button mat-menu-item>Item 2</button>
-            </mat-menu>
-            <button type="button" mat-button (click)="drawer.toggle()">
-                Build
-            </button>
-        </mat-toolbar>
-
         <app-explorer></app-explorer>
     </mat-drawer>
 
     <div class="example-sidenav-content">
-        <mat-toolbar style="height: auto; padding: 0px;">
-            <button type="button" mat-button (click)="drawer.toggle()">
-                <mat-icon>menu</mat-icon>
-            </button>
-            
-        </mat-toolbar>
         <mat-tab-group dynamicHeight>
             <mat-tab label="ftree.c">
                 <app-editor></app-editor>
             </mat-tab>
-            
         </mat-tab-group>
-        
+
     </div>
 
 </mat-drawer-container>

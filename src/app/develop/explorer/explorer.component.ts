@@ -8,18 +8,20 @@ import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFolderDialogComponent } from './modals/newFolderDialog/newFolderDialog.component';
 import { RenameDialogComponent } from './modals/renameDialog/renameDialog.component';
-
-export class FileNode {
-  children: FileNode[];
-  filename: string;
-  type: any;
-}
+import { FileNode } from '../file.service';
 
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
   expandable: boolean;
   name: string;
   level: number;
+}
+
+
+export enum ExtType {
+  FUNCTION,
+  INDEX_SCAN,
+  TABLE_SCAN
 }
 
 @Component({
@@ -29,11 +31,12 @@ interface ExampleFlatNode {
 })
 
 export class ExplorerComponent implements OnInit {
+  curProjectPath: string;
+  extensionType: ExtType;
   nestedTreeControl: NestedTreeControl<FileNode>;
   nestedDataSource: MatTreeNestedDataSource<FileNode>;
   dataChange: BehaviorSubject<FileNode[]> = new BehaviorSubject<FileNode[]>([]);
-
-
+  activeNode: FileNode;
 
   constructor(public dialog: MatDialog) {
     this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
@@ -44,47 +47,79 @@ export class ExplorerComponent implements OnInit {
     this.dataChange.next([
       {
         filename: "ftree",
-        type: "",
+        type: "folder",
         children: [
           {
             filename: "ftree",
-            type: "c",
+            type: "file",
             children: [],
+            content: "// This is ftree.",
+            suffix: "c"
           },
           {
             filename: "ftree",
-            type: "control",
+            type: "file",
             children: [],
+            content: "// This is ftree.",
+            suffix: "control"
           },
           {
             filename: "Makefile",
-            type: "makefile",
+            type: "file",
             children: [],
+            content: "// This is ftree.",
+            suffix: ""
           },
           {
             filename: "ftree--0.1",
-            type: "sql",
+            type: "file",
             children: [],
+            content: "// This is ftree.",
+            suffix: "sql"
           },
           {
             filename: "README",
-            type: "md",
+            type: "file",
             children: [],
+            content: "// This is ftree.",
+            suffix: "md"
+          },
+          {
+            filename: "sql",
+            type: "folder",
+            children: [
+              {
+                filename: "test",
+                type: "file",
+                children: [],
+                content: "// This is ftree.",
+                suffix: "sql"
+              }
+            ],
+            content: "",
+            suffix: ""
           }
-        ]
+        ],
+        content: "",
+        suffix: ""
       }
     ]);
   }
 
-  private _getChildren = (node: FileNode) => { return observableOf(node.children); };
-  
-  hasNestedChild = (_: number, nodeData: FileNode) => {return !(nodeData.type); };
-
-  display(filename: string) {
+  ngOnInit() {
 
   }
 
-  ngOnInit() {
+  private _getChildren = (node: FileNode) => { return observableOf(node.children); };
+  
+  hasNestedChild = (_: number, nodeData: FileNode) => {
+    if (nodeData.type === "folder")
+      return true; 
+    else
+      return false;
+  };
+
+  display(filename: string) {
 
   }
 
@@ -131,5 +166,57 @@ export class ExplorerComponent implements OnInit {
   openMenu(event: MouseEvent, element: FileElement, viewChild: MatMenuTrigger) {
     event.preventDefault();
     viewChild.openMenu();
+  }
+
+  save() {
+    this.dataChange.next([
+      {
+        filename: "ftree",
+        type: "folder",
+        children: [
+          {
+            filename: "ftree",
+            type: "file",
+            children: [],
+            content: "// This is ftree.",
+            suffix: "c"
+          },
+          {
+            filename: "ftree",
+            type: "file",
+            children: [],
+            content: "// This is ftree.",
+            suffix: "control"
+          },
+          {
+            filename: "Makefile",
+            type: "file",
+            children: [],
+            content: "// This is ftree.",
+            suffix: ""
+          },
+          {
+            filename: "ftree--0.1",
+            type: "file",
+            children: [],
+            content: "// This is ftree.",
+            suffix: "sql"
+          },
+          {
+            filename: "README",
+            type: "file",
+            children: [],
+            content: "// This is ftree.",
+            suffix: "md"
+          }
+        ],
+        content: "",
+        suffix: ""
+      }
+    ]);
+  }
+
+  saveAll() {
+
   }
 }

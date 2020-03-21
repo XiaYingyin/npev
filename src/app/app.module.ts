@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import {PlanView} from '../plan-view/plan-view';
 import {PlanList} from '../plan-list/plan-list';
 import {PlanNew} from '../plan-new/plan-new';
@@ -20,6 +20,31 @@ import { AppBootstrapModule } from './app-bootstrap.module';
 import { HomeComponent } from '../home/home.component';
 import { PerfTestComponent } from '../perf-test/perf-test.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfigService } from './app-config.service';
+import { map, catchError } from 'rxjs/operators';
+import { of, Observable, ObservableInput } from '../../node_modules/rxjs';
+
+function load(http: HttpClient, config: ConfigService): (() => Promise<boolean>) {
+   return (): Promise<boolean> => {
+     return new Promise<boolean>((resolve: (a: boolean) => void): void => {
+        http.get('assets/config/config.json')
+          .pipe(
+            map((x: ConfigService) => {
+              config.baseUrl = x.baseUrl;
+              resolve(true);
+            }),
+            catchError((x: { status: number }, caught: Observable<void>): ObservableInput<{}> => {
+              if (x.status !== 404) {
+                resolve(false);
+              }
+              config.baseUrl = 'http://localhost:8080/';
+              resolve(true);
+              return of({});
+            })
+          ).subscribe();
+     });
+   };
+ }
 
 @NgModule({
    declarations: [
@@ -48,6 +73,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
    ],
    bootstrap: [
       AppComponent
-   ]
+   ],
+   providers: [
+      {
+          provide: APP_INITIALIZER,
+          useFactory: load,
+          deps: [
+            HttpClient,
+            ConfigService
+          ],
+          multi: true
+      }
+  ]
 })
 export class AppModule { }

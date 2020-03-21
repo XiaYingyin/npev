@@ -2,6 +2,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ConfigService } from '../app/app-config.service';
 
 
 export interface IJSONPlan {
@@ -45,7 +46,8 @@ export class SqlService {
     //private queryURL: string = 'http://10.77.110.134:8080/query/';
     private extListURL: string = 'http://10.77.110.134:8080/extension/list';
     
-    constructor(private _http: HttpClient) { 
+    constructor(private _http: HttpClient, private cs: ConfigService) { 
+        this.basicURL = cs.baseUrl;
     }
     getQueryPlan(query: string): Observable<string> {
         return this._http.get(this.queryURL + query)
@@ -108,14 +110,14 @@ export class SqlService {
 
     private getTestURL: string = "/extension/test/";
     getTestResult(extName: string) {
-        this.basicURL = "http://localhost:8080";
+        //this.basicURL = "http://localhost:8080";
         console.log(extName);
         return this._http.get<BarChartData>(this.basicURL + this.getTestURL + extName);
     }
 
     private perfTestURL: string = "/extension/test";
     perfTest(extName: string) {
-        this.basicURL = "http://localhost:8080";
+        //this.basicURL = "http://localhost:8080";
         let params = new HttpParams();
         params = params.set('name', extName);
         return this._http.get<BarChartData>(this.basicURL + this.perfTestURL, {params});
@@ -123,7 +125,7 @@ export class SqlService {
 
     private updateExtInfoURL: string = "/extension/list/";
     updateExtInfo(extName: string, desc: string) {
-        this.basicURL = "http://localhost:8080";
+        //this.basicURL = "http://localhost:8080";
         let params = new HttpParams();
         params = params.set('description', desc);
         //console.log(desc);
@@ -132,7 +134,7 @@ export class SqlService {
 
     private deleteExtURL: string = "/extension/list/";
     deleteExt(extName: string) {
-        this.basicURL = "http://localhost:8080";
+        //this.basicURL = "http://localhost:8080";
         return this._http.delete(this.basicURL + this.deleteExtURL + extName);
     }
 }

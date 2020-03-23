@@ -8,7 +8,8 @@ import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFolderDialogComponent } from './modals/newFolderDialog/newFolderDialog.component';
 import { RenameDialogComponent } from './modals/renameDialog/renameDialog.component';
-import { FileNode } from '../file.service';
+import { FileNode, FileService, FileInfo } from '../file.service';
+import { SqlService } from 'src/services/sql-service';
 
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
@@ -33,83 +34,68 @@ export enum ExtType {
 export class ExplorerComponent implements OnInit {
   curProjectPath: string;
   extensionType: ExtType;
+
+  projectName: string;
   nestedTreeControl: NestedTreeControl<FileNode>;
   nestedDataSource: MatTreeNestedDataSource<FileNode>;
   dataChange: BehaviorSubject<FileNode[]> = new BehaviorSubject<FileNode[]>([]);
   activeNode: FileNode;
+  data: FileNode [];
+  fileInfo: FileInfo = {
+              name: "",
+              size: 0,
+              content: "",
+              Readable: false,
+              ifExist: true,
+              Writeable: false, 
+              absolutePath: ""
+            };
+  fileContent: string = '';
+  IDEWorkSpace: string = "~/vds_workspace/";
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private fileService: FileService, private sqlService: SqlService) {
     this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
-
     this.dataChange.subscribe(data => this.nestedDataSource.data = data);
 
-    this.dataChange.next([
-      {
-        filename: "ftree",
-        type: "folder",
-        children: [
-          {
-            filename: "ftree",
-            type: "file",
-            children: [],
-            content: "// This is ftree.",
-            suffix: "c"
-          },
-          {
-            filename: "ftree",
-            type: "file",
-            children: [],
-            content: "// This is ftree.",
-            suffix: "control"
-          },
-          {
-            filename: "Makefile",
-            type: "file",
-            children: [],
-            content: "// This is ftree.",
-            suffix: ""
-          },
-          {
-            filename: "ftree--0.1",
-            type: "file",
-            children: [],
-            content: "// This is ftree.",
-            suffix: "sql"
-          },
-          {
-            filename: "README",
-            type: "file",
-            children: [],
-            content: "// This is ftree.",
-            suffix: "md"
-          },
-          {
-            filename: "sql",
-            type: "folder",
-            children: [
-              {
-                filename: "test",
-                type: "file",
-                children: [],
-                content: "// This is ftree.",
-                suffix: "sql"
+     this.curProjectPath = "/Users/liuchaoyang/Documents/gitRepo/f9";
+     let strArr = (this.curProjectPath.split('/'));
+     this.projectName = strArr[strArr.length - 1];
+    if (this.curProjectPath !== null) {
+      this.fileService.getFileNodeTree(this.curProjectPath).subscribe(
+        result => { 
+          this.data = result as FileNode [];
+          this.dataChange.next(this.data);
+        }
+      );
+      //this.fileService.getFileContent
+    }
+
+    this.sqlService.refreshEvent.subscribe(
+      params => {
+        console.log("explorer get path: " + params);
+        this.curProjectPath = params;
+        const that = this;
+        let strArr = (params.split('/'));
+        this.projectName = strArr[strArr.length - 1];
+        setTimeout(
+          function () {
+            that.fileService.getFileNodeTree(params).subscribe(
+              (result: FileNode[]) => { 
+                console.log(result);
+                that.data = result as FileNode [];
+                that.dataChange.next(that.data);
               }
-            ],
-            content: "",
-            suffix: ""
-          }
-        ],
-        content: "",
-        suffix: ""
+            )
+        }, 1000);
       }
-    ]);
+    )
   }
 
   ngOnInit() {
 
   }
-
+  // fileInfo: FileInfo;
   private _getChildren = (node: FileNode) => { return observableOf(node.children); };
   
   hasNestedChild = (_: number, nodeData: FileNode) => {
@@ -133,6 +119,7 @@ export class ExplorerComponent implements OnInit {
   @Output() navigatedDown = new EventEmitter<FileElement>();
   @Output() elementMoved = new EventEmitter<{ element: FileElement; moveTo: FileElement }>();
   @Output() navigatedUp = new EventEmitter();
+  @Output() fileSelected = new EventEmitter<string>();
 
   ngOnChanges(changes: SimpleChanges): void {}
 
@@ -168,55 +155,38 @@ export class ExplorerComponent implements OnInit {
     viewChild.openMenu();
   }
 
-  save() {
-    this.dataChange.next([
-      {
-        filename: "ftree",
-        type: "folder",
-        children: [
-          {
-            filename: "ftree",
-            type: "file",
-            children: [],
-            content: "// This is ftree.",
-            suffix: "c"
-          },
-          {
-            filename: "ftree",
-            type: "file",
-            children: [],
-            content: "// This is ftree.",
-            suffix: "control"
-          },
-          {
-            filename: "Makefile",
-            type: "file",
-            children: [],
-            content: "// This is ftree.",
-            suffix: ""
-          },
-          {
-            filename: "ftree--0.1",
-            type: "file",
-            children: [],
-            content: "// This is ftree.",
-            suffix: "sql"
-          },
-          {
-            filename: "README",
-            type: "file",
-            children: [],
-            content: "// This is ftree.",
-            suffix: "md"
-          }
-        ],
-        content: "",
-        suffix: ""
+  refresh() {
+    this.fileService.getFileNodeTree(this.curProjectPath).subscribe(
+      result => { 
+        this.data = result as FileNode [];
+        this.dataChange.next(this.data);
       }
-    ]);
+    );
+  }
+
+  save() {
+    
   }
 
   saveAll() {
+
+  }
+
+  onFileSelected(path: string) {
+    console.log("file " + path + " is selected!");
+    // let fileInfo: FileInfo;
+    this.fileService.getFileContent(path).subscribe(
+      fileinfo => {
+        console.log(fileinfo);
+        this.fileInfo = fileinfo;
+        this.fileContent = fileinfo.content;
+      }
+    );
+    // this.fileSelected.emit(fileInfo.content);
+    this.fileSelected.emit(this.fileInfo.content);
+  }
+
+  createProject(name: string, type: string) {
 
   }
 }

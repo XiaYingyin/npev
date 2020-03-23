@@ -22,6 +22,10 @@ import { RenameDialogComponent } from "./explorer/modals/renameDialog/renameDial
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from "@angular/material/list";
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+import {MatStepperModule} from '@angular/material/stepper';
+import { CreateProjDialogComponent } from './create-proj-dialog/create-proj-dialog.component';
+import { FileService } from './file.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,8 @@ import { MatListModule } from "@angular/material/list";
     DevelopComponent, 
     ExplorerComponent,
     NewFolderDialogComponent, 
-    RenameDialogComponent
+    RenameDialogComponent, 
+    CreateProjDialogComponent
   ],
   imports: [
     CommonModule,
@@ -49,8 +54,13 @@ import { MatListModule } from "@angular/material/list";
     MatDialogModule,
     MatInputModule,
     MatListModule,
-    CodeEditorModule.forRoot()
+    MatStepperModule,
+    CodeEditorModule.forRoot(),
+    MonacoEditorModule.forRoot() // use forRoot() in main app module only.
   ],
-  entryComponents: [NewFolderDialogComponent, RenameDialogComponent]
+  providers: [
+    FileService 
+  ],
+  entryComponents: [NewFolderDialogComponent, RenameDialogComponent, CreateProjDialogComponent]
 })
 export class DevelopModule { }

@@ -21,9 +21,9 @@
     </mat-menu>
 
     <mat-menu #project="matMenu">
-        <button mat-menu-item>Function Extension</button>
-        <button mat-menu-item>Table Scan Extension</button>
-        <button mat-menu-item>Index Scan Extension</button>
+        <button mat-menu-item (click)="openDialog('function')">Function Extension</button>
+        <button mat-menu-item (click)="openDialog('table')">Table Scan Extension</button>
+        <button mat-menu-item (click)="openDialog('index')">Index Scan Extension</button>
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="setting">Setting</button>
     <mat-menu #setting="matMenu">
@@ -40,15 +40,15 @@
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side" opened>
-        <app-explorer></app-explorer>
+        <app-explorer (fileSelected)="fileSelectedHandler($event)"></app-explorer>
     </mat-drawer>
 
     <div class="example-sidenav-content">
-        <mat-tab-group dynamicHeight>
-            <mat-tab label="ftree.c">
-                <app-editor></app-editor>
-            </mat-tab>
-        </mat-tab-group>
+        <!-- <mat-tab-group dynamicHeight> -->
+            <!-- <mat-tab label="ftree.c"> -->
+                <app-editor [editorVal]="editorVal"></app-editor>
+            <!-- </mat-tab> -->
+        <!-- </mat-tab-group> -->
 
     </div>
 

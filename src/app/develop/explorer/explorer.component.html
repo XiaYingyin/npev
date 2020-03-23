@@ -1,16 +1,16 @@
 <mat-toolbar style="height: auto; padding: 0px; background-color: white;">
   <mat-icon style="padding-right: 10px;">home</mat-icon>
-  ftree
+  {{projectName}}
 </mat-toolbar>
 <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree" style="height: 100%;">
-  <mat-tree-node *matTreeNodeDef="let node" (click)="activeNode = node"
+  <mat-tree-node *matTreeNodeDef="let node" (click)="onFileSelected(node.path)"
     [ngClass]="{ 'background-highlight': activeNode === node }">
     <span [matMenuTriggerFor]="rootMenu" [matMenuTriggerData]="{node: node}" #menuTrigger="matMenuTrigger"></span>
     <div fxLayout="column" fxLayoutAlign="space-between center" (contextmenu)="openMenu($event,node, menuTrigger)">
       <li class="mat-tree-node">
         <mat-icon style="margin:5px; padding-left: 20px;">note</mat-icon>
         <span style="margin:5px; padding-left: 5px;">
-          {{node.filename}}.{{node.suffix}}
+          {{node.name}}
         </span>
 
       </li>
@@ -31,7 +31,7 @@
             </button>
           </span>
           <span style="margin:5px; padding-left: 10px;">
-            {{node.filename}}
+            {{node.name}}
           </span>
 
         </li>

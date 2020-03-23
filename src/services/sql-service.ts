@@ -41,6 +41,7 @@ export interface BarChartData {
 export class SqlService {
     selectEvent: EventEmitter<number> = new EventEmitter();
     chartEvent: EventEmitter<BarChartData []> = new EventEmitter();
+    refreshEvent: EventEmitter<string> = new EventEmitter();
 
     private basicURL: string = 'http://localhost:8080';    
     

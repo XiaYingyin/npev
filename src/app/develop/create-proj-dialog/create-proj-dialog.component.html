@@ -1,0 +1,67 @@
+<form [formGroup]="stepperFormGroup" (ngSubmit)="submit()">
+    <mat-vertical-stepper #stepper linear>
+        <mat-step >
+          <!-- <form [formGroup]="firstFormGroup"> -->
+            <ng-template matStepLabel>Fill out your name</ng-template>
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Extension name" formControlName="nameCtrl"
+                     required>
+            </mat-form-field>
+            <div>
+              <button mat-button type="button" matStepperNext>Next</button>
+            </div>
+          <!-- </form> -->
+        </mat-step>
+        <mat-step >
+          <!-- <form [formGroup]="secondFormGroup"> -->
+            <ng-template matStepLabel>Fill out your version</ng-template>
+            <mat-form-field>
+              <mat-label>Version</mat-label>
+              <input matInput formControlName="versionCtrl" placeholder="1.0"
+                     required>
+            </mat-form-field>
+            <div>
+              <button mat-button type="button" matStepperPrevious>Back</button>
+              <button mat-button type="button" matStepperNext>Next</button>
+            </div>
+          <!-- </form> -->
+        </mat-step>
+        <mat-step >
+            <!-- <form [formGroup]="thirdFormGroup"> -->
+              <ng-template matStepLabel>Fill out your description</ng-template>
+              <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="descCtrl" placeholder="This is a extension."
+                       required>
+              </mat-form-field>
+              <div>
+                <button mat-button type="button" matStepperPrevious>Back</button>
+                <button mat-button type="button" matStepperNext>Next</button>
+              </div>
+            <!-- </form> -->
+          </mat-step>
+          <mat-step>
+            <!-- <form [formGroup]="forthFormGroup"> -->
+              <ng-template matStepLabel>Fill out the position of extension</ng-template>
+              <mat-form-field>
+                <mat-label>position</mat-label>
+                <input matInput formControlName="posCtrl" placeholder="~/vds_workspace/" required>
+              </mat-form-field>
+              <div>
+                <button mat-button type="button" matStepperPrevious>Back</button>
+                <button mat-button type="button" matStepperNext>Next</button>
+              </div>
+            <!-- </form> -->
+          </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button type="button" matStepperPrevious>Back</button>
+            <button mat-button type="submit" [disabled]="!stepperFormGroup.valid" >Submit</button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+</form> 
+  

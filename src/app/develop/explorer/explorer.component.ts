@@ -32,7 +32,7 @@ export enum ExtType {
 })
 
 export class ExplorerComponent implements OnInit {
-  curProjectPath: string;
+  curProjectPath: string = '';
   extensionType: ExtType;
 
   projectName: string;
@@ -58,7 +58,9 @@ export class ExplorerComponent implements OnInit {
     this.nestedDataSource = new MatTreeNestedDataSource();
     this.dataChange.subscribe(data => this.nestedDataSource.data = data);
 
-     this.curProjectPath = "/Users/liuchaoyang/Documents/gitRepo/f9";
+     //this.curProjectPath = "/Users/liuchaoyang/Documents/gitRepo/f9";
+     //localStorage.setItem('prevProjectPath', this.curProjectPath);
+     this.curProjectPath = localStorage.getItem('prevProjectPath');
      let strArr = (this.curProjectPath.split('/'));
      this.projectName = strArr[strArr.length - 1];
     if (this.curProjectPath !== null) {
@@ -75,6 +77,7 @@ export class ExplorerComponent implements OnInit {
       params => {
         console.log("explorer get path: " + params);
         this.curProjectPath = params;
+        localStorage.setItem('prevProjectPath', this.curProjectPath);
         const that = this;
         let strArr = (params.split('/'));
         this.projectName = strArr[strArr.length - 1];

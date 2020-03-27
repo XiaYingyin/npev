@@ -22,6 +22,7 @@ export class DevelopHomeComponent {
   };
 
   editorVal: string;
+  openOutputPanel: boolean;
 
  
   animal: string;

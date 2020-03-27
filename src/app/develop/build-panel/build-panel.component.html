@@ -1,0 +1,22 @@
+
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Build Output
+        </mat-panel-title>
+        <mat-panel-description>
+          {{panelOpenState ? 'open' : 'closed'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      
+      <mat-card style="height: 200px;"> 
+
+      <mat-card-content [style.overflow]="'auto'" [style.height.px]="'200'">
+          <p>
+              {{output}}
+          </p>
+      </mat-card-content>     
+      </mat-card>
+      
+    </mat-expansion-panel>

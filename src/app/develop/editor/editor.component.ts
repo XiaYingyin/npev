@@ -27,28 +27,6 @@ export class EditorComponent implements OnInit {
     return this._editorVal;
   }
 
-  // model: CodeModel = {
-  //   language: 'c',
-  //   uri: 'main.json',
-  //   value: '',
-
-  // };
-  // model: CodeModel = {
-  //   language: 'c',
-  //   uri: 'main.json',
-  //   value: '',
-  //   dependencies: ['@types/node', '@ngstack/translate', '@ngstack/code-editor']
-  // };
-
-  // options = {
-  //   contextmenu: true,
-  //   automaticLayout: true,
-  //   wordWrap: 'on',
-  //   fontSize: 14,
-  //   minimap: {
-  //     enabled: true
-  //   }
-  // };
   editorOptions = {theme: 'vs', language: 'c'};
   // onCodeChanged(value) {
   //   console.log('CODE', value);
@@ -67,5 +45,9 @@ export class EditorComponent implements OnInit {
   setEditorValue(value: string) {
     console.log("test editor " + value);
     // this.model.value = value;
+  }
+
+  setEditorHeight(value: number) {
+    
   }
 }

@@ -26,6 +26,10 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
 import {MatStepperModule} from '@angular/material/stepper';
 import { CreateProjDialogComponent } from './create-proj-dialog/create-proj-dialog.component';
 import { FileService } from './file.service';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { BuildPanelComponent } from './build-panel/build-panel.component';
+import { MatCardModule } from  '@angular/material/card';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,7 @@ import { FileService } from './file.service';
     ExplorerComponent,
     NewFolderDialogComponent, 
     RenameDialogComponent, 
-    CreateProjDialogComponent
+    CreateProjDialogComponent, BuildPanelComponent
   ],
   imports: [
     CommonModule,
@@ -55,6 +59,9 @@ import { FileService } from './file.service';
     MatInputModule,
     MatListModule,
     MatStepperModule,
+    MatExpansionModule,
+    MatCardModule,
+    ScrollingModule,
     CodeEditorModule.forRoot(),
     MonacoEditorModule.forRoot() // use forRoot() in main app module only.
   ],

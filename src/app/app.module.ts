@@ -23,6 +23,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfigService } from './app-config.service';
 import { map, catchError } from 'rxjs/operators';
 import { of, Observable, ObservableInput } from '../../node_modules/rxjs';
+import { MatTreeModule } from '@angular/material/tree';
+import {MatIconModule} from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from "@angular/material/list";
+import {MatStepperModule} from '@angular/material/stepper';
+
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatCardModule } from  '@angular/material/card';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 function load(http: HttpClient, config: ConfigService): (() => Promise<boolean>) {
    return (): Promise<boolean> => {
@@ -69,7 +86,23 @@ function load(http: HttpClient, config: ConfigService): (() => Promise<boolean>)
       HttpClientModule,
       AppBootstrapModule,
       AppRoutingModule,
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
+      MatTreeModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatRadioModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatListModule,
+    MatStepperModule,
+    MatExpansionModule,
+    MatCardModule,
+    ScrollingModule
    ],
    bootstrap: [
       AppComponent

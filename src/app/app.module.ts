@@ -36,6 +36,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from "@angular/material/list";
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDividerModule} from '@angular/material/divider';
 
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatCardModule } from  '@angular/material/card';
@@ -102,6 +104,8 @@ function load(http: HttpClient, config: ConfigService): (() => Promise<boolean>)
     MatStepperModule,
     MatExpansionModule,
     MatCardModule,
+    MatDividerModule,
+    MatGridListModule,
     ScrollingModule
    ],
    bootstrap: [

@@ -1,1 +1,5 @@
-/* @import '../assets/css/styles.css'; */
+.error-message {
+    background-color: #FB4418;
+    padding: 6px;
+    color: #fff
+}

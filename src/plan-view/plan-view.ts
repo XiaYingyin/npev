@@ -19,6 +19,7 @@ export class PlanView {
     rootContainer: any;
     hideMenu: boolean = true;
     editName: string;
+    editQuery: boolean = true;
 
     viewOptions: any = {
         showPlanStats: true,

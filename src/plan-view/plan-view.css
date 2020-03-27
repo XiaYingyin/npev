@@ -1,1 +1,28 @@
-/* @import '../assets/css/styles.css'; */
+.grid-container {
+    text-align: left;
+}
+
+.plan-stats {
+    display: flex;
+    font-size: 13px;
+    margin: 10px auto 10px auto;
+    width: 650px;
+    position: relative;
+}
+
+.plan-stats div {
+    padding-right: 10px;
+    flex-grow: 1
+}
+
+.plan-stats .stat-value {
+    display: block;
+    text-align: center;
+    font-size: 17px
+}
+
+.plan-stats .stat-label {
+    display: block;
+    text-align: center;
+    font-size: 12px
+}

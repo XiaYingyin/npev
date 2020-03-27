@@ -1,42 +1,79 @@
 <div class="page" style="max-width: 500px; margin: auto;">
    <div class="page page-stretch">
-      <h2><span *ngIf="!editName">{{plan.name}}</span>
-         <input *ngIf="editName" class="input-box input-box-main" type="text" [(ngModel)]="plan.name">
-         <button class="btn btn-link btn-lg" (click)="editName = !editName">
-            <i class="fa fa-pencil"></i>
-         </button>
-      </h2>
+      <mat-card>
+         <mat-card-title>
+            <span *ngIf="!editName">{{plan.name}}</span>
+            <mat-form-field *ngIf="editName" style="width: 75%;">
+               <input matInput [(ngModel)]="plan.name">
+            </mat-form-field>
 
-      <div *ngIf="viewOptions.showPlanStats" class="plan-stats">
-         <div>
-            <span class="stat-value">{{plan.planStats.executionTime | duration}}</span>
-            <span class="stat-label">execution time ({{plan.planStats.executionTime | durationUnit}})</span>
-         </div>
-         <div *ngIf="plan.planStats.planningTime">
-            <span class="stat-value">{{plan.planStats.planningTime | number:'.0-2'}}</span>
-            <span class="stat-label">planning time (ms)</span>
-         </div>
-         <div *ngIf="plan.planStats.maxDuration">
-            <span class="stat-value">{{plan.planStats.maxDuration | duration}}</span>
-            <span class="stat-label">slowest node ({{plan.planStats.maxDuration | durationUnit}})</span>
-         </div>
-         <div *ngIf="plan.planStats.maxRows">
-            <span class="stat-value">{{plan.planStats.maxRows | number:'.0-2'}}</span>
-            <span class="stat-label">largest node (rows)</span>
-         </div>
-         <div *ngIf="plan.planStats.maxCost">
-            <span class="stat-value">{{plan.planStats.maxCost | number:'.0-2'}}</span>
-            <span class="stat-label">costliest node</span>
-         </div>
-         <div class="btn-close" (click)="viewOptions.showPlanStats = false"><i class="fa fa-close"></i></div>
-      </div>
+            <button class="btn btn-link btn-lg" (click)="editName = !editName">
+               <i class="fa fa-pencil"></i>
+            </button>
+         </mat-card-title>
 
-      <div class="plan">
-         <ul>
-            <li>
-               <plan-node [plan]="plan" [node]="rootContainer.Plan" [viewOptions]="viewOptions"></plan-node>
-            </li>
-         </ul>
-      </div>
+         <mat-card-content>
+            <div class="grid-container">
+               {{plan.query}}
+            </div>
+            <mat-divider [inset]="true" style="margin: 10px;"></mat-divider>
+            <mat-grid-list cols="4" rowHeight="50px">
+               <div *ngIf="viewOptions.showPlanStats">
+                  <mat-grid-tile colspan="1" rowspan="1">
+                     <div class="plan-stats">
+                        <div>
+                           <span class="stat-value">{{plan.planStats.executionTime | duration}}</span>
+                           <span class="stat-label">execution time
+                              ({{plan.planStats.executionTime | durationUnit}})</span>
+                        </div>
+                     </div>
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                     <div *ngIf="plan.planStats.planningTime" class="plan-stats">
+                        <div>
+                           <span class="stat-value">{{plan.planStats.planningTime | number:'.0-2'}}</span>
+                           <span class="stat-label">planning time (ms)</span>
+                        </div>
+                     </div>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile colspan="1" rowspan="1">
+                     <div *ngIf="plan.planStats.maxRows" class="plan-stats">
+                        <div>
+                           <span class="stat-value">{{plan.planStats.maxRows | number:'.0-2'}}</span>
+                           <span class="stat-label">largest node (rows)</span>
+                        </div>
+                     </div>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile colspan="1" rowspan="1">
+                     <div *ngIf="plan.planStats.maxCost" class="plan-stats">
+                        <div>
+                           <span class="stat-value">{{plan.planStats.maxCost | number:'.0-2'}}</span>
+                           <span class="stat-label">costliest node</span>
+                        </div>
+                     </div>
+                  </mat-grid-tile>
+
+               </div>
+
+            </mat-grid-list>
+         </mat-card-content>
+      </mat-card>
+
+      <mat-card style="margin-top: 30px; margin-bottom: 30px;">
+         <mat-card-title>
+            Query Plan Tree
+         </mat-card-title>
+         <mat-card-content [style.overflow]="'auto'">
+            <div class="plan">
+               <ul>
+                  <li>
+                     <plan-node [plan]="plan" [node]="rootContainer.Plan" [viewOptions]="viewOptions"></plan-node>
+                  </li>
+               </ul>
+            </div>
+         </mat-card-content>
+      </mat-card>
    </div>
 </div>

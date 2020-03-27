@@ -3080,7 +3080,7 @@ nav .about {
 
 .plan {
     padding-bottom: 30px;
-    margin-left: 100px
+    margin-left: 0px
 }
 
 .plan ul {
@@ -3159,57 +3159,6 @@ nav .about {
 .plan ul li .plan-node:hover+ul li::before,
 .plan ul li .plan-node:hover+ul ul::before {
     border-color: #008CAF
-}
-
-.plan-stats {
-    display: flex;
-    font-size: 13px;
-    margin: 10px auto 10px auto;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #dedede;
-    border-radius: 12px;
-    width: 650px;
-    position: relative
-}
-
-.plan-stats div {
-    padding-right: 10px;
-    flex-grow: 1
-}
-
-.plan-stats .stat-value {
-    display: block;
-    text-align: center;
-    font-size: 17px
-}
-
-.plan-stats .stat-label {
-    display: block;
-    text-align: center;
-    font-size: 12px
-}
-
-.plan-stats:after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -9px;
-    width: 0;
-    height: 0;
-    border-top: solid 9px #dedede;
-    border-left: solid 9px transparent;
-    border-right: solid 9px transparent
-}
-
-.plan-stats .btn-close {
-    padding: 6px;
-    background-color: transparent;
-    font-size: 17px;
-    text-align: center;
-    margin-left: 6px;
-    cursor: pointer;
-    border: 0
 }
 
 .plan-node {
@@ -3573,7 +3522,8 @@ footer .fa {
     border-radius: 3px;
     margin-bottom: 18px;
     z-index: 6;
-    left: 0
+    left: 0;
+    width: 200px
 }
 
 .plan-query-container code {
@@ -3583,7 +3533,9 @@ footer .fa {
 .plan-query-container .plan-query-text {
     background-color: #fff;
     font-family: "source code";
-    text-align: left
+    text-align: left;
+    word-wrap:break-word;  
+word-break:break-all; 
 }
 
 .plan-query-container .plan-query-text .code-key-item {

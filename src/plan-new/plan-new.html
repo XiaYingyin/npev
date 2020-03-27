@@ -1,10 +1,21 @@
 <div class="page" style="max-width: 500px; margin: auto;">
-  <div>
-    <input placeholder="name (optional)" class="input-box input-box-main" type="text" [(ngModel)]="newPlanName">
-    <button class="btn btn-default btn-lg pad-top pull-right" (click)="submitPlan()">submit</button>
+  <mat-card style="height: 80vh;">
+    <mat-card-title>
+      Query
+    </mat-card-title>
+  <div style="margin-bottom: 20px;">
+    <mat-form-field style="width: 35%;">
+      <input matInput placeholder="Input this query's name (optional)" type="text" [(ngModel)]="newPlanName">
+      <mat-hint>*It will name it by timestamp if null.</mat-hint>
+    </mat-form-field>
+    <button (click)="submitPlan()" mat-raised-button color="primary" style="margin-left: 30px;">Submit</button>
   </div>
 
   <p *ngIf="validationMessage" class="error-message">{{validationMessage}}</p>
-  <!-- <textarea placeholder="paste execution plan" class="input-box input-box-lg code" [(ngModel)]="newPlanContent"></textarea> -->
-  <textarea placeholder="paste corresponding SQL query" class="input-box input-box-lg code" [(ngModel)]="newPlanQuery"></textarea>
+  <mat-form-field style="width: 100%;" appearance="outline">
+    <mat-label>Input your SQL query</mat-label>
+    <textarea matInput [(ngModel)]="newPlanQuery" style="height: 300px;"></textarea>
+    <mat-hint>*Please make sure input right SQL. It won't check it.</mat-hint>
+  </mat-form-field>
+</mat-card>
 </div>

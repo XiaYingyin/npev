@@ -61,7 +61,9 @@ export class ExplorerComponent implements OnInit {
      //this.curProjectPath = "/Users/liuchaoyang/Documents/gitRepo/f9";
      //localStorage.setItem('prevProjectPath', this.curProjectPath);
      this.curProjectPath = localStorage.getItem('prevProjectPath');
-     let strArr = (this.curProjectPath.split('/'));
+     let strArr: string [] = [''];
+     if (this.curProjectPath !== null)
+        strArr = (this.curProjectPath.split('/'));
      this.projectName = strArr[strArr.length - 1];
     if (this.curProjectPath !== null) {
       this.fileService.getFileNodeTree(this.curProjectPath).subscribe(

@@ -1,31 +1,32 @@
 <div class="page" style="max-width: 500px; margin: auto;">
-   <div class="hero-container" *ngIf="plans.length === 0">
-      There are 0 plans. Please <a [routerLink]="['/plans/new']">submit</a> a plan for visualization
+   <div class="mat-elevation-z8">
+      <table style="width: 100%;" mat-table [dataSource]="dataSource">
+
+         <!-- Position Column -->
+         <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let plan"><a [routerLink]="['/plans/', plan.id]">{{plan.name}}</a> </td>
+         </ng-container>
+
+         <!-- Name Column -->
+         <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let plan"> {{plan.createdOn | momentDate }} </td>
+         </ng-container>
+
+         <!-- Symbol Column -->
+         <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let plan" class="align-right"><button class="btn btn-danger"
+                  (click)="openDialog(plan)">
+                  <i class="fa fa-trash"></i>delete</button> </td>
+         </ng-container>
+
+         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
    </div>
 
-  <table class="table pad-bottom">
-    <tr *ngFor="let plan of plans">
-      <!-- this is a hack that should be converted to a proper dialog once that is available in angular 2-->
-      <div *ngIf="openDialog">
-          <div class="modal-backdrop"></div>
-          <div class="modal">
-             <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-body">You're about to delete plan "{{planToDelete.name}}". Are you sure?</div>
-                  <div class="modal-footer">
-                     <button class="btn btn-primary" (click)="deletePlan()">Yes</button>
-                     <button class="btn btn-default" (click)="cancelDelete()">No</button>
-                  </div>
-              </div>
-             </div>
-          </div>
-      </div>
-
-      <td width="30%"><a [routerLink]="['/plans/', plan.id]">{{plan.name}}</a></td>
-      <td>created on {{plan.createdOn | momentDate }}</td>
-      <td class="align-right"><button class="btn btn-danger" (click)="requestDelete(plan)">
-        <i class="fa fa-trash"></i>delete</button>
-     </td>
-    </tr>
-  </table>
 </div>

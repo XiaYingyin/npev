@@ -20,7 +20,11 @@ export class PlanView {
     hideMenu: boolean = true;
     editName: string;
     editQuery: boolean = true;
-
+    isCardExpanded = false;
+    expand() {
+      this.isCardExpanded = !this.isCardExpanded;
+    }
+    
     viewOptions: any = {
         showPlanStats: true,
         showHighlightBar: true,

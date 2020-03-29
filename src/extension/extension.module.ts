@@ -29,6 +29,15 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {A11yModule} from '@angular/cdk/a11y';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {PortalModule} from '@angular/cdk/portal';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import { ExtTestComponent } from './ext-test/ext-test.component';
 
 @NgModule({
    declarations: [
@@ -38,7 +47,8 @@ import { MatChipsModule } from '@angular/material/chips';
       ExtListComponent,
       ExtSelectComponent,
       ExtIntroComponent,
-      ExtChartComponent
+      ExtChartComponent,
+      ExtTestComponent
    ],
    imports: [
       CommonModule,
@@ -58,7 +68,8 @@ import { MatChipsModule } from '@angular/material/chips';
       MatTabsModule,
       MatDialogModule,
       MatInputModule,
-      MatChipsModule
+      MatChipsModule,
+      MatAutocompleteModule
    ]
 })
 export class ExtensionModule { }

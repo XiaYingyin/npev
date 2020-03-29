@@ -1,0 +1,50 @@
+<nav class="navbar navbar-light bg-light row">
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+            <mat-chip-list #chipList aria-label="Fruit selection">
+                <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(fruit)">
+                    {{fruit.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="New fruit..." [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)" [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addSelect($event)">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-chip-list>
+        </mat-form-field>
+    </form>
+    <button type="button" class="btn btn-primary" (click)="onClick($event)">Test</button>
+</nav>
+
+<div *ngIf="!testComplete; else elseBlock">
+    <div class="card text-center">
+        <div class="card-body">
+            <p class="card-text">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </p>
+            <div align="center">
+                <mat-spinner color="primary"></mat-spinner>
+            </div>
+            <p class="card-text">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </p>
+        </div>
+    </div>
+</div>
+<ng-template #elseBlock>
+    <app-ext-chart [barChartData]="barChartDataSet" [barChartLabels]="barChartLabels" [extName]="extInfo.name">
+    </app-ext-chart>
+</ng-template>

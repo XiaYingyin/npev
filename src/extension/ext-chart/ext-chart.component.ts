@@ -21,7 +21,19 @@ export class ExtChartComponent implements OnInit {
   public barChartPlugins = [];
   private runTimeSet$: Observable<runTime []>;
   displayFlag: boolean = false;
-  @Input() public extName: string;
+  //@Input() public extName: string;
+  _extName: string;
+
+  @Input() set extName(value: string) {
+    this._extName = value;
+    console.log("chart: " + this._extName);
+  }
+
+  get extName() {
+    return this._extName;
+  }
+
+
 
   @Input() public barChartData: ChartDataSets[] = [];
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;

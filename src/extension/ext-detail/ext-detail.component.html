@@ -8,20 +8,21 @@
       </ul>
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ extInfo.name }}  {{extInfo.version}}</h5>
+      <h5 class="card-title">{{ extInfo.name }} {{extInfo.version}}</h5>
       <div *ngIf="!ifEdit; else elseBlock">
         <p class="card-text">{{ extInfo.description }}</p>
         <button class="btn btn-primary" (click)="editExtDesc()">Edit</button>
       </div>
       <ng-template #elseBlock>
         <div class="input-group">
-          <textarea class="form-control" aria-label="With textarea" ref-textarea [(ngModel)]="DescText" rows=6></textarea>  
+          <textarea class="form-control" aria-label="With textarea" ref-textarea [(ngModel)]="DescText"
+            rows=6></textarea>
         </div>
-        <br/>
+        <br />
         <div align="right">
           <button class="btn btn-primary" type="submit" (click)="saveExtDesc()">Save</button>
         </div>
-      </ng-template>  
+      </ng-template>
     </div>
   </div>
   <div class="card text-left">
@@ -34,7 +35,7 @@
     </div>
     <div class="card-body">
       <ul class="list-group">
-       <li class="list-group-item" *ngFor="let function of extFuncList">{{function}}</li>
+        <li class="list-group-item" *ngFor="let function of extFuncList">{{function}}</li>
       </ul>
     </div>
   </div>
@@ -78,19 +79,46 @@
       <div class="card-body">
         <!-- <h5 class="card-title">Special title treatment</h5> -->
         <nav class="navbar navbar-light bg-light row">
-          <div class="container">
-            <!-- <div class="input-group col-md-6">
+          <!-- <div class="container"> -->
+          <!-- <div class="input-group col-md-6">
               <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">{{ extInfo.name }}</label>
               </div>
               <button type="button" class="btn btn-primary" (click)="onClick($event)">Test it again!</button>
             </div> -->
-            <form class="form-inline col-md-6">
-              <input class="form-control mr-sm-2" type="search" placeholder="Extension" aria-label="Search">
-              <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Compare</button> -->
-              <button type="button" class="btn btn-primary" (click)="onClick($event)">Test or Compare</button>
-            </form>
-          </div>
+          <!-- <form class="form-inline col-md-6"> -->
+          <!-- <input class="form-control mr-sm-2" type="search" placeholder="Extension" aria-label="Search"> -->
+          <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Compare</button> -->
+          <!-- <button type="button" class="btn btn-primary" (click)="onClick($event)">Test</button> -->
+          <!-- </form> -->
+          <!-- <div class="example-button-row"> -->
+          <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <!-- <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" -->
+              <!-- [matAutocomplete]="auto"> -->
+
+              <mat-chip-list #chipList aria-label="Fruit selection">
+                <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
+                  (removed)="remove(fruit)">
+                  {{fruit.name}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="New fruit..." [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event)" [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addSelect($event)">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-chip-list>
+            </mat-form-field>
+
+          </form>
+
+          <button type="button" class="btn btn-primary" (click)="onClick($event)">Test</button>
+          <!-- </div> -->
+          <!-- </div> -->
         </nav>
 
         <div *ngIf="!testComplete; else elseBlock">

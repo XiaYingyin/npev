@@ -12,14 +12,12 @@ export interface Fruit {
   name: string;
 }
 
-
-
 @Component({
-  selector: 'app-ext-detail',
-  templateUrl: './ext-detail.component.html',
-  styleUrls: ['./ext-detail.component.css']
+  selector: 'app-ext-test',
+  templateUrl: './ext-test.component.html',
+  styleUrls: ['./ext-test.component.css']
 })
-export class ExtDetailComponent implements OnInit {
+export class ExtTestComponent implements OnInit {
   extName: string;
   extInfo: IExtInfo;
   extNameList: string [] = [];
@@ -39,21 +37,14 @@ export class ExtDetailComponent implements OnInit {
     
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.getExtDetail();
-    // this.extNameList.push(this.extInfo.name);
-    // this.DescText = this.extInfo.description;
+    this.extNameList.push(this.extInfo.name);
+    this.DescText = this.extInfo.description;
     // this.sqlService.getTestResult(this.extInfo.name).subscribe((data: BarChartData) => {
     //   const barChartData = { ...data };
     //   this.barChartDataSet.push(barChartData);
     // });
-
-    const barChartData = await this.getTestResult();
-    let bcds: BarChartData [] = [];
-    bcds.push(barChartData);
-    this.barChartDataSet = bcds;
-    this.testComplete = true;
-    this.sqlService.chartEvent.emit(this.barChartDataSet);
     
     this.testComplete = true;
     // this.sqlService.chartEvent.emit(this.barChartDataSet);
@@ -79,18 +70,6 @@ export class ExtDetailComponent implements OnInit {
     return new Promise<BarChartData>( resolve => {
       //const groups: Array<Node> = [];
       this.sqlService.perfTest(this.extName).subscribe((data: BarChartData) => {
-        const bcd = { ...data };
-        console.log(bcd);
-        resolve(bcd);
-        return bcd;
-      });
-    });
-  }
-
-  public async getTestResult(): Promise<BarChartData> {
-    return new Promise<BarChartData>( resolve => {
-      //const groups: Array<Node> = [];
-      this.sqlService.getTestResult(this.extName).subscribe((data: BarChartData) => {
         const bcd = { ...data };
         console.log(bcd);
         resolve(bcd);

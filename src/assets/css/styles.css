@@ -3437,7 +3437,7 @@ nav .about {
     background-color: #f7f7f7
 }
 
-.modal-backdrop {
+/* .modal-backdrop {
     position: fixed;
     top: 0;
     right: 0;
@@ -3492,7 +3492,7 @@ nav .about {
 
 .modal .modal-dialog .modal-content .modal-footer button {
     margin-left: 3px
-}
+} */
 
 footer {
     border-top: 2px solid #dedede;

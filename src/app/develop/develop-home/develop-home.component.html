@@ -27,15 +27,15 @@
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="setting">Setting</button>
     <mat-menu #setting="matMenu">
-        <button mat-menu-item>Output panel</button>
+        <button mat-menu-item (click)="openOutputPanel()">Output panel</button>
         <button mat-menu-item (click)="drawer.toggle()">Explorer panel</button>
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="build">
         Build
     </button>
     <mat-menu #build="matMenu">
-        <button mat-menu-item>Build project</button>
-        <button mat-menu-item>Install</button>
+        <button mat-menu-item (click)="buildProj()">Build project</button>
+        <button mat-menu-item (click)="install()">Install</button>
     </mat-menu>
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
@@ -44,14 +44,36 @@
     </mat-drawer>
 
     <div class="example-sidenav-content">
-        <mat-accordion>
+        <!-- <mat-accordion> -->
 <!-- <mat-tab-group dynamicHeight> -->
         <!-- <mat-tab label="ftree.c"> -->
-            <app-editor [editorVal]="editorVal"></app-editor>
+            <!-- <mat-grid-list cols="4" rowHeight="200px"> -->
+                <!-- <mat-grid-tile > -->
+                    <!-- <mat-card #editor="matCard" style="height: 70vh;"> -->
+                        <!-- <div #editor style="height: 70vh;"> -->
+                            <app-editor  [editorVal]="editorVal">
+
+                            </app-editor>
+                        <!-- </div> -->
+                        
+                    <!-- </mat-card> -->
+                    
+                <!-- </mat-grid-tile> -->
+                <!-- <mat-grid-tile > -->
+                    <mat-accordion>
+                        <app-build-panel></app-build-panel>
+                    </mat-accordion>
+                    
+                <!-- </mat-grid-tile> -->
+            <!-- </mat-grid-list> -->
+                
+            
+            
+            
             <!-- </mat-tab> -->
             <!-- </mat-tab-group> -->
-            <app-build-panel></app-build-panel>
-        </mat-accordion>
+            
+        <!-- </mat-accordion> -->
         
     </div>
 

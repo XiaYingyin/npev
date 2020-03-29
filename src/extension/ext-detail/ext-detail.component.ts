@@ -41,19 +41,14 @@ export class ExtDetailComponent implements OnInit {
 
   async ngOnInit() {
     this.getExtDetail();
-    // this.extNameList.push(this.extInfo.name);
-    // this.DescText = this.extInfo.description;
+    this.extNameList.push(this.extInfo.name);
+    this.DescText = this.extInfo.description;
     // this.sqlService.getTestResult(this.extInfo.name).subscribe((data: BarChartData) => {
     //   const barChartData = { ...data };
     //   this.barChartDataSet.push(barChartData);
     // });
 
-    const barChartData = await this.getTestResult();
-    let bcds: BarChartData [] = [];
-    bcds.push(barChartData);
-    this.barChartDataSet = bcds;
-    this.testComplete = true;
-    this.sqlService.chartEvent.emit(this.barChartDataSet);
+    // this.sqlService.chartEvent.emit(this.barChartDataSet);
     
     this.testComplete = true;
     // this.sqlService.chartEvent.emit(this.barChartDataSet);

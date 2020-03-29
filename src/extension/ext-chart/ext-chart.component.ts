@@ -72,7 +72,7 @@ export class ExtChartComponent implements OnInit {
     this.barChartData = bcds;
     //console.log(this.barChartData);
     this.displayFlag = true;
-    console.log(bcd);
+    console.log("init " + this.extName);
     if (!bcd.label) 
       this.displayFlag = false;
     else 
@@ -84,7 +84,6 @@ export class ExtChartComponent implements OnInit {
       //const groups: Array<Node> = [];
       this.sqlService.getTestResult(this.extName).subscribe((data: BarChartData) => {
         const bcd = { ...data };
-        console.log(bcd);
         this.displayFlag = true;
         resolve(bcd);
         return bcd;

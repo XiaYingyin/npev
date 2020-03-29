@@ -48,6 +48,10 @@ export class EditorComponent implements OnInit {
   }
 
   setEditorHeight(value: number) {
-    
+    //this.
+  }
+
+  test() {
+    console.log("this is child editor");
   }
 }

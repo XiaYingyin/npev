@@ -30,6 +30,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { BuildPanelComponent } from './build-panel/build-panel.component';
 import { MatCardModule } from  '@angular/material/card';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -38,8 +40,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     DevelopComponent, 
     ExplorerComponent,
     NewFolderDialogComponent, 
-    RenameDialogComponent, 
-    CreateProjDialogComponent, BuildPanelComponent
+    RenameDialogComponent,
+    CreateProjDialogComponent,
+    BuildPanelComponent
   ],
   imports: [
     CommonModule,
@@ -62,6 +65,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatExpansionModule,
     MatCardModule,
     ScrollingModule,
+    MatGridListModule,
+    MatSnackBarModule,
     CodeEditorModule.forRoot(),
     MonacoEditorModule.forRoot() // use forRoot() in main app module only.
   ],

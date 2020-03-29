@@ -39,7 +39,7 @@ export class ExplorerComponent implements OnInit {
   nestedTreeControl: NestedTreeControl<FileNode>;
   nestedDataSource: MatTreeNestedDataSource<FileNode>;
   dataChange: BehaviorSubject<FileNode[]> = new BehaviorSubject<FileNode[]>([]);
-  activeNode: FileNode;
+  activeNode: any;
   data: FileNode [];
   fileInfo: FileInfo = {
               name: "",
@@ -177,10 +177,12 @@ export class ExplorerComponent implements OnInit {
 
   }
 
-  onFileSelected(path: string) {
-    console.log("file " + path + " is selected!");
+  //onFileSelected(path: string) {
+    onFileSelected(node: FileNode) {
+      this.activeNode = node;
+    console.log("file " + node.path + " is selected!");
     // let fileInfo: FileInfo;
-    this.fileService.getFileContent(path).subscribe(
+    this.fileService.getFileContent(node.path).subscribe(
       fileinfo => {
         console.log(fileinfo);
         this.fileInfo = fileinfo;

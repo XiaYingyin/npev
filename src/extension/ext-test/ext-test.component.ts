@@ -57,7 +57,7 @@ export class ExtTestComponent implements OnInit {
   constructor(private sqlService: SqlService) {
     this.sqlService.chartEvent.subscribe(
       ( params: ChartDataSets[]) => {
-        console.log("call by route");
+        // console.log("call by route");
         if (params[0].label) {
           this.barChartData = params;
           // console.log(params);
@@ -67,7 +67,7 @@ export class ExtTestComponent implements OnInit {
         }
       } 
     );
-console.log("Get to ext test");
+// console.log("Get to ext test");
     this.sqlService.extListFilter(0).subscribe(
       (data) => {
         this.extensionList = data;
@@ -86,7 +86,7 @@ console.log("Get to ext test");
     // bcds.push(bd);
     // this.barChartData = bcds;
     // console.log(bd);
-    console.log("after init ext test");
+    // console.log("after init ext test");
     this.testComplete = true;
     this.filteredOptions = this.myControl.valueChanges
       .pipe(

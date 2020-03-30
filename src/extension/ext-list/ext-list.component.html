@@ -1,11 +1,11 @@
 <div class="pre-scrollable">
-  <ul class="ext" *ngFor="let ext of extensions$ | async; let i=index">
+  <ul class="ext" *ngFor="let ext of extensions$ | async; let i=index" (click)="getSelectedRow(ext)" [ngClass]="{ 'background-highlight': activeExt === ext }">
     <div>
-      <li (click)="getSelectedRow(ext.name)">
+      <li>
         <a routerLink="{{ext.name}}">
           <span class="badge">{{i+1}}</span> {{ext.name}}
         </a>
-        <button class="delete" title="delete this extension" (click)="deleteExtesion()">x</button>
+        <button class="delete" title="delete this extension" (click)="openDialog(ext)">x</button>
       </li>
     </div>
   </ul>

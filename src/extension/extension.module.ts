@@ -41,7 +41,7 @@ import { ExtTestComponent } from './ext-test/ext-test.component';
 import { SqlService } from 'src/services/sql-service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-
+import { DeleteDialogComponent } from '../plan-list/modals/delete-dialog.component';
 
 
 @NgModule({

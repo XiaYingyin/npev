@@ -38,6 +38,7 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import { ExtTestComponent } from './ext-test/ext-test.component';
+import { SqlService } from 'src/services/sql-service';
 
 @NgModule({
    declarations: [
@@ -70,6 +71,7 @@ import { ExtTestComponent } from './ext-test/ext-test.component';
       MatInputModule,
       MatChipsModule,
       MatAutocompleteModule
-   ]
+   ],
+   providers: [ SqlService ]
 })
 export class ExtensionModule { }

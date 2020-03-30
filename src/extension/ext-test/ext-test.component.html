@@ -2,12 +2,12 @@
     <form class="example-form">
         <mat-form-field class="example-full-width">
             <mat-chip-list #chipList aria-label="Fruit selection">
-                <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
+                <mat-chip *ngFor="let fruit of extensions" [selectable]="selectable" [removable]="removable"
                     (removed)="remove(fruit)">
                     {{fruit.name}}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
-                <input placeholder="New fruit..." [matChipInputFor]="chipList"
+                <input placeholder="Add other extensions..." [matChipInputFor]="chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
                     (matChipInputTokenEnd)="add($event)" [formControl]="myControl" [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addSelect($event)">
@@ -45,6 +45,37 @@
     </div>
 </div>
 <ng-template #elseBlock>
-    <app-ext-chart [barChartData]="barChartDataSet" [barChartLabels]="barChartLabels" [extName]="extInfo.name">
-    </app-ext-chart>
+    <div style="display: block;" *ngIf="displayFlag; else elseBlock">
+        <canvas baseChart 
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+      <ng-template #elseBlock>
+        <div align="center">
+          <div class="card text-center">
+            <div class="card-body">
+              <p class="card-text">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </p>
+              <h5 class="card-text">There are no test data!</h5>
+              <p class="card-text">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </ng-template>      
 </ng-template>

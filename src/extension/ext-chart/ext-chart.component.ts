@@ -20,7 +20,7 @@ export class ExtChartComponent implements OnInit {
   public barChartLegend = true;
   public barChartPlugins = [];
   private runTimeSet$: Observable<runTime []>;
-  displayFlag: boolean = false;
+  displayFlag: boolean;
   //@Input() public extName: string;
   _extName: string;
 
@@ -35,11 +35,10 @@ export class ExtChartComponent implements OnInit {
 
 
 
-  @Input() public barChartData: ChartDataSets[] = [];
+  @Input() public barChartData: ChartDataSets[] = [ { data: [34.0, 16.9, 23.5, 45.7, 23.0, 19.0, 23.5, 45.7, 100.0, 60.0, 23.5, 45.7, 23.5, 45.7, 100.0, 90.0, 23.5, 45.7, 100.0, 78.0, 23.5, 45.7], label: "test" } ];
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
   constructor(private sqlService: SqlService) {
-    
     //this.chart.update();
     // this.sqlService.getTestResult(this.extName).subscribe((data: BarChartData) => {
     //   const bcd = { ...data };
@@ -55,13 +54,14 @@ export class ExtChartComponent implements OnInit {
           this.barChartData = params;
           console.log(params);
           this.displayFlag = true;
-          console.log("get length: " + params.length);
+          console.log("get length: " + params.length + this.displayFlag);
         } else {
           this.displayFlag = false;
           console.log("no data");
         }
       } 
     );
+    this.displayFlag = true;
    }
 
   async ngOnInit() {
@@ -71,20 +71,22 @@ export class ExtChartComponent implements OnInit {
     //   console.log(bcd);
     //   this.barChartData.push(bcd);
     // });
-    const bcd: BarChartData = await this.getTestResult();
-    let bcds: BarChartData [] = [];
-    bcds.push(bcd);
+    //const bcd: BarChartData = await this.getTestResult();
+    //let bcds: BarChartData [] = [];
+    //bcds.push(bcd);
     // this.barChartData.push(bcd);
     
-    this.barChartData = bcds;
+    //this.barChartData = bcds;
     //console.log(this.barChartData);
-    this.displayFlag = true;
-    console.log("init " + this.extName);
+    //this.displayFlag = true;
+    //console.log("init " + this.extName);
     // if (!bcd.label) 
     //   this.displayFlag = false;
     // else 
     //   this.displayFlag = true;
-    this.displayFlag = false;
+    // this.displayFlag = false;
+    // this.displayFlag = true;
+    console.log("after nginit " + this.displayFlag);
   }
   
   public async getTestResult(): Promise<BarChartData> {

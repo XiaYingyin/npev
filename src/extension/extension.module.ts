@@ -39,6 +39,10 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import { ExtTestComponent } from './ext-test/ext-test.component';
 import { SqlService } from 'src/services/sql-service';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+
+
 
 @NgModule({
    declarations: [
@@ -70,6 +74,8 @@ import { SqlService } from 'src/services/sql-service';
       MatDialogModule,
       MatInputModule,
       MatChipsModule,
+      MatPaginatorModule,
+      MatTableModule,
       MatAutocompleteModule
    ],
    providers: [ SqlService ]

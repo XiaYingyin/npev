@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IExtInfo, SqlService, BarChartData } from "../../services/sql-service";
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
-export interface ExtName {
-  name: string;
+export interface InfoItem {
+  id: number;
+  item: string;
 }
 
 @Component({
@@ -20,7 +23,14 @@ export class ExtDetailComponent implements OnInit {
   extTypeList: string[] = [];
   ifEdit: boolean = false;
   DescText: string;
-  
+
+  displayedColumns: string[] = ['id', 'item'];
+  funcDataSource = new MatTableDataSource<InfoItem>();
+  optDataSource = new MatTableDataSource<InfoItem>();
+  typeDataSource = new MatTableDataSource<InfoItem>();
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
   // extensionList: IExtInfo [];
   constructor(private route: ActivatedRoute, private router: Router, private sqlService: SqlService) {
 
@@ -41,12 +51,46 @@ export class ExtDetailComponent implements OnInit {
         this.extFuncList = this.extInfo.functionList;
         this.extTypeList = this.extInfo.typeList;
         this.extOptList = this.extInfo.operatorList;
+
+        let funcTable: InfoItem[] = [];
+        let c: number = 0;
+        if (this.extFuncList !== undefined) {
+          for (const name of this.extFuncList) {
+            c = c + 1;
+            funcTable.push({ id: c, item: name });
+          }
+        }
+        this.funcDataSource = new MatTableDataSource<InfoItem>(funcTable);
+        this.funcDataSource.paginator = this.paginator;
+
+        let optTable: InfoItem[] = [];
+        c = 0;
+        if (this.extOptList !== undefined) {
+          for (const name of this.extOptList) {
+            c = c + 1;
+            optTable.push({ id: c, item: name });
+          }
+        }
+        this.optDataSource = new MatTableDataSource<InfoItem>(optTable);
+        this.optDataSource.paginator = this.paginator;
+
+        let typeTable: InfoItem[] = [];
+        c = 0;
+        if (this.extTypeList !== undefined) {
+          for (const name of this.extTypeList) {
+            c = c + 1;
+            typeTable.push({ id: c, item: name });
+          }
+        }
+        this.typeDataSource = new MatTableDataSource<InfoItem>(typeTable);
+        this.typeDataSource.paginator = this.paginator;
+
         this.sqlService.getTestResult(data.extInfo.name).subscribe((data: BarChartData) => {
           const barChartData = { ...data };
           let bcds: BarChartData[] = [];
           bcds.push(barChartData);
           this.sqlService.chartEvent.emit(bcds);
-        }); 
+        });
       });
   }
 

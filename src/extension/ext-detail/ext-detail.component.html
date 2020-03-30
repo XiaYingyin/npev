@@ -34,9 +34,26 @@
       </ul>
     </div>
     <div class="card-body">
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let function of extFuncList">{{function}}</li>
-      </ul>
+      <!-- <ul class="list-group"> -->
+      <!-- <li class="list-group-item" *ngFor="let function of extFuncList">{{function}}</li> -->
+      <!-- </ul> -->
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="funcDataSource">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="item">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.item}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
     </div>
   </div>
   <div class="card text-left">
@@ -48,9 +65,26 @@
       </ul>
     </div>
     <div class="card-body">
-      <ul class="list-group">
+      <!-- <ul class="list-group">
         <li class="list-group-item" *ngFor="let operator of extOptList">{{operator}}</li>
-      </ul>
+      </ul> -->
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="optDataSource">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="item">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.item}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
     </div>
   </div>
   <div class="card text-left">
@@ -62,9 +96,26 @@
       </ul>
     </div>
     <div class="card-body">
-      <ul class="list-group">
+      <!-- <ul class="list-group">
         <li class="list-group-item" *ngFor="let type of extTypeList">{{type}}</li>
-      </ul>
+      </ul> -->
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="typeDataSource">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="item">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.item}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
     </div>
   </div>
   <div *ngIf="extInfo.type !== 3">

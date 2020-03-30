@@ -21,7 +21,7 @@ resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<I
     take(1),
     mergeMap(extInfo => {
       if (extInfo) {
-        console.log(extInfo.name);
+        console.log("route to " + extInfo.name);
         return of(extInfo);
       } else { // id not found
         this.router.navigate(['/extension']);

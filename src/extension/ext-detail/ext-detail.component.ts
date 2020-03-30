@@ -57,6 +57,8 @@ export class ExtDetailComponent implements OnInit {
         startWith(''),
         map(value => this._filter(value))
       );
+
+      console.log("detail init " + this.extName);
   }
 
   getExtDetail() {
@@ -68,6 +70,17 @@ export class ExtDetailComponent implements OnInit {
         this.extFuncList = this.extInfo.functionList;
         this.extTypeList = this.extInfo.typeList;
         this.extOptList = this.extInfo.operatorList;
+        this.sqlService.getTestResult(data.extInfo.name).subscribe((data: BarChartData) => {
+          
+      const barChartData = { ...data };
+      let bcds: BarChartData [] = [];
+    bcds.push(barChartData);
+    this.barChartDataSet = bcds;
+      // this.barChartDataSet.push(barChartData);
+      this.sqlService.chartEvent.emit(this.barChartDataSet);
+    });
+
+   
       });
   }
   public async perfTest(): Promise<BarChartData> {

@@ -26,7 +26,7 @@ export class ExtChartComponent implements OnInit {
 
   @Input() set extName(value: string) {
     this._extName = value;
-    console.log("chart: " + this._extName);
+    // console.log("chart: " + this._extName);
   }
 
   get extName() {
@@ -49,10 +49,17 @@ export class ExtChartComponent implements OnInit {
     // });
     
     this.sqlService.chartEvent.subscribe(
-      params => {
-        this.barChartData = params;
-        console.log(params);
-        this.displayFlag = true;
+      ( params: ChartDataSets[]) => {
+        console.log("call by route");
+        if (params[0].label) {
+          this.barChartData = params;
+          console.log(params);
+          this.displayFlag = true;
+          console.log("get length: " + params.length);
+        } else {
+          this.displayFlag = false;
+          console.log("no data");
+        }
       } 
     );
    }
@@ -73,10 +80,11 @@ export class ExtChartComponent implements OnInit {
     //console.log(this.barChartData);
     this.displayFlag = true;
     console.log("init " + this.extName);
-    if (!bcd.label) 
-      this.displayFlag = false;
-    else 
-      this.displayFlag = true;
+    // if (!bcd.label) 
+    //   this.displayFlag = false;
+    // else 
+    //   this.displayFlag = true;
+    this.displayFlag = false;
   }
   
   public async getTestResult(): Promise<BarChartData> {

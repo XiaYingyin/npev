@@ -46,13 +46,13 @@ export class DevelopHomeComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       this.animal = result;
     });
   }
 
   fileSelectedHandler(event: string) {
-    console.log("parent get content: " + event);
+    // console.log("parent get content: " + event);
     this.editorVal = event;
   }
 

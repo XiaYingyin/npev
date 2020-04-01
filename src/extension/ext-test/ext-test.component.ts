@@ -65,6 +65,7 @@ export class ExtTestComponent implements OnInit {
         } else {
           this.displayFlag = false;
         }
+        this.extensions = [{name: this.extName}];
       } 
     );
 // console.log("Get to ext test");
@@ -72,14 +73,17 @@ export class ExtTestComponent implements OnInit {
       (data) => {
         this.extensionList = data;
         for (const ext of this.extensionList) {
-          this.options.push(ext.name);
+          if (ext.name !== this.extName) {
+            if (ext.type !== 3)
+              this.options.push(ext.name);
+          }
         }
       }
     );
   }
 
   async ngOnInit() {
-    console.log("init ext test");
+    // console.log("init ext test");
     this.displayFlag = true;
     // let bcds: BarChartData[] = [];
     // const bd = await this.getTestResult();
@@ -127,10 +131,12 @@ export class ExtTestComponent implements OnInit {
   }
 
   remove(ext: ExtName): void {
-    const index = this.extensions.indexOf(ext);
-    // console.log("remove: " + index);
-    if (index >= 0) {
-      this.extensions.splice(index, 1);
+    if (ext.name !== this.extName) {
+      const index = this.extensions.indexOf(ext);
+      // console.log("remove: " + index);
+      if (index >= 0) {
+        this.extensions.splice(index, 1);
+      }
     }
   }
 

@@ -18,7 +18,7 @@ export class EditorComponent implements OnInit {
                       "}\n";
 
   @Input() set editorVal(value: string) {
-    console.log("editor get content: " + value);
+    // console.log("editor get content: " + value);
     this._editorVal = value;
     // this.model.value = value;
   }
@@ -43,7 +43,7 @@ export class EditorComponent implements OnInit {
   }
 
   setEditorValue(value: string) {
-    console.log("test editor " + value);
+    // console.log("test editor " + value);
     // this.model.value = value;
   }
 
@@ -52,6 +52,6 @@ export class EditorComponent implements OnInit {
   }
 
   test() {
-    console.log("this is child editor");
+    // console.log("this is child editor");
   }
 }

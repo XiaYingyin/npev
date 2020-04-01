@@ -77,7 +77,7 @@ export class ExplorerComponent implements OnInit {
 
     this.sqlService.refreshEvent.subscribe(
       params => {
-        console.log("explorer get path: " + params);
+        // console.log("explorer get path: " + params);
         this.curProjectPath = params;
         localStorage.setItem('prevProjectPath', this.curProjectPath);
         const that = this;
@@ -87,7 +87,7 @@ export class ExplorerComponent implements OnInit {
           function () {
             that.fileService.getFileNodeTree(params).subscribe(
               (result: FileNode[]) => { 
-                console.log(result);
+                // console.log(result);
                 that.data = result as FileNode [];
                 that.dataChange.next(that.data);
               }
@@ -180,17 +180,16 @@ export class ExplorerComponent implements OnInit {
   //onFileSelected(path: string) {
     onFileSelected(node: FileNode) {
       this.activeNode = node;
-    console.log("file " + node.path + " is selected!");
+    // console.log("file " + node.path + " is selected!");
     // let fileInfo: FileInfo;
     this.fileService.getFileContent(node.path).subscribe(
       fileinfo => {
-        console.log(fileinfo);
+        // console.log(fileinfo);
         this.fileInfo = fileinfo;
         this.fileContent = fileinfo.content;
+        this.fileSelected.emit(this.fileInfo.content);
       }
-    );
-    // this.fileSelected.emit(fileInfo.content);
-    this.fileSelected.emit(this.fileInfo.content);
+    );    
   }
 
   createProject(name: string, type: string) {

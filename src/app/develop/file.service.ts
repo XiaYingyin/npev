@@ -147,7 +147,7 @@ export class FileService implements IFileService {
   };
 
   ncreateProject(projectInfo: ProjectInfo): Observable<ProjectInfo> {
-    console.log("post project info: " + projectInfo.name);
+    // console.log("post project info: " + projectInfo.name);
     return this._http.post<ProjectInfo>(this.baseUrl + this.createProjectUrl, projectInfo).pipe(
       retry(3), // retry a failed request up to 3 times
       catchError(this.handleError) // then handle the error

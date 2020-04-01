@@ -52,7 +52,7 @@ export class PlanList {
         this._planService.deletePlan(plan);
         this.plans = this._planService.getPlans();
         this.dataSource = new MatTableDataSource<IPlan>(this.plans);
-        console.log(plan.name);
+        // console.log(plan.name);
         this.dataSource.paginator = this.paginator;
     }
 
@@ -80,7 +80,7 @@ export class PlanList {
             if (this.result) {
                 this.deletePlan(plan);
             }
-            console.log(this.result);
+            // console.log(this.result);
         });
     }
 }

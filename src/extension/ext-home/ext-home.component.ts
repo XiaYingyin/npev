@@ -65,7 +65,7 @@ export class ExtHomeComponent implements OnInit {
 
   getChange(formValue: any) { 
     this._extType = formValue;
-    console.log(formValue);
+    // console.log(formValue);
   }
 
   deleteExtesion() {

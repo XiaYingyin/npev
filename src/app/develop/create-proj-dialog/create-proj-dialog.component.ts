@@ -77,8 +77,8 @@ export class CreateProjDialogComponent implements OnInit {
 
     this.fileService.ncreateProject(this.projectInfo).subscribe(
       pi =>  {
-        console.log("origin: " + this.projectInfo.name);
-        console.log("get info" + pi);
+        // console.log("origin: " + this.projectInfo.name);
+        // console.log("get info" + pi);
       }
     );
     // const pi = await this.ncreateProject();
@@ -94,8 +94,8 @@ export class CreateProjDialogComponent implements OnInit {
       resolve => {
         this.fileService.ncreateProject(this.projectInfo).subscribe(
           pi =>  {
-                 console.log("origin: " + this.projectInfo.name);
-                 console.log("get info" + pi);
+                //  console.log("origin: " + this.projectInfo.name);
+                //  console.log("get info" + pi);
                  return pi;
           }
         )

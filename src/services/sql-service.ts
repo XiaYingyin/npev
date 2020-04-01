@@ -108,7 +108,7 @@ export class SqlService {
 
     private getTestURL: string = "/extension/test/";
     getTestResult(extName: string) {
-        console.log(extName);
+        // console.log(extName);
         return this._http.get<BarChartData>(this.basicURL + this.getTestURL + extName);
     }
 

@@ -178,9 +178,9 @@ export class PlanService {
         node[this.ACTUAL_DURATION_PROP] = node[this.ACTUAL_TOTAL_TIME_PROP];
         node[this.ACTUAL_COST_PROP] = node[this.TOTAL_COST_PROP];
 
-        console.log (node);
+        // console.log (node);
         _.each(node.Plans, subPlan => {
-           console.log('processing chldren', subPlan)
+        //    console.log('processing chldren', subPlan)
            // since CTE scan duration is already included in its subnodes, it should be be
            // subtracted from the duration of this node
             if (subPlan[this.NODE_TYPE_PROP] !== this.CTE_SCAN_PROP) {

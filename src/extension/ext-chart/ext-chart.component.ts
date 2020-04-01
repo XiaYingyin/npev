@@ -49,15 +49,15 @@ export class ExtChartComponent implements OnInit {
     
     this.sqlService.chartEvent.subscribe(
       ( params: ChartDataSets[]) => {
-        console.log("call by route");
+        // console.log("call by route");
         if (params[0].label) {
           this.barChartData = params;
-          console.log(params);
+          // console.log(params);
           this.displayFlag = true;
-          console.log("get length: " + params.length + this.displayFlag);
+          // console.log("get length: " + params.length + this.displayFlag);
         } else {
           this.displayFlag = false;
-          console.log("no data");
+          // console.log("no data");
         }
       } 
     );
@@ -86,7 +86,6 @@ export class ExtChartComponent implements OnInit {
     //   this.displayFlag = true;
     // this.displayFlag = false;
     // this.displayFlag = true;
-    console.log("after nginit " + this.displayFlag);
   }
   
   public async getTestResult(): Promise<BarChartData> {

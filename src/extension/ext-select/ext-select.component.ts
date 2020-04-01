@@ -26,7 +26,7 @@ export class ExtSelectComponent implements OnInit {
 
   getChange(formValue: any) { 
     this.extType = +String(formValue).substring(0, 1);
-    console.log(this.extType);
+    // console.log(this.extType);
     this.sqlService.selectEvent.emit(this.extType);
   }
 }

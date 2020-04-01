@@ -33,12 +33,12 @@ export class ExtListComponent implements OnInit {
 
     this._sqlService.selectEvent.subscribe(
       params => {
-        console.log(params);
+        // console.log(params);
         this.extensions$ = this._sqlService.extListFilter(params);
       }
     );
 
-    console.log("test");
+    // console.log("test");
   }
 
   ngOnInit() {
@@ -77,7 +77,7 @@ export class ExtListComponent implements OnInit {
       if (this.result) {
         this.deleteExtesion(ext);
       }
-      console.log(this.result);
+      // console.log(this.result);
     });
   }
 }

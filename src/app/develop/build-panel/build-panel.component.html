@@ -13,8 +13,8 @@
       <mat-card style="height: 200px;"> 
 
       <mat-card-content [style.overflow]="'auto'" [style.height.px]="'200'">
-          <p>
-              {{output}}
+          <p *ngFor="let o of output">
+              {{o}}
           </p>
       </mat-card-content>     
       </mat-card>

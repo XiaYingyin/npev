@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BuildPanelComponent implements OnInit {
   @Input() panelOpenState = false;
-  output: string = "";
+  output: string[] = [];
   constructor() { }
 
   ngOnInit() {
@@ -15,6 +15,6 @@ export class BuildPanelComponent implements OnInit {
   }
 
   displayOutput(output: string) {
-    this.output = output;
+    this.output = output.split("\n");
   }
 }

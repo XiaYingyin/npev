@@ -7,6 +7,10 @@ import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular
 import { map, catchError, retry } from 'rxjs/operators';
 import { ConfigService } from '../app-config.service';
 //import { EventEmitter } from 'protractor';
+export interface BuildInfo {
+  timeStamp: string;
+  result: string;
+}
 
 export interface FileNode {
   id: number;
@@ -152,5 +156,26 @@ export class FileService implements IFileService {
       retry(3), // retry a failed request up to 3 times
       catchError(this.handleError) // then handle the error
     );
+  }
+
+  createFileUrl: string = "/develop/file/";
+  createFile(path: string, name: string) {
+    let params = new HttpParams();
+    params = params.set('path', path);
+    this._http.get<string>(this.baseUrl + this.createFileUrl + name, { params });
+  }
+
+  buildProjectUrl: string = "/develop/build/"
+  buildProject(path: string):Observable<BuildInfo> {
+    let params = new HttpParams();
+    params = params.set('path', path);
+    return this._http.get<BuildInfo>(this.baseUrl + this.buildProjectUrl, { params }).pipe();
+  }
+
+  installExtensionUrl: string = "/develop/install/"
+  installExtension(path: string, name: string) {
+    let params = new HttpParams();
+    params = params.set('path', path);
+    this._http.get<string>(this.baseUrl + this.installExtensionUrl + name, { params });
   }
 }

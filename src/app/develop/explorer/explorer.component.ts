@@ -8,8 +8,9 @@ import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFolderDialogComponent } from './modals/newFolderDialog/newFolderDialog.component';
 import { RenameDialogComponent } from './modals/renameDialog/renameDialog.component';
-import { FileNode, FileService, FileInfo } from '../file.service';
+import { FileNode, FileService, FileInfo, BuildInfo } from '../file.service';
 import { SqlService } from 'src/services/sql-service';
+import { stringify } from 'querystring';
 
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
@@ -194,5 +195,28 @@ export class ExplorerComponent implements OnInit {
 
   createProject(name: string, type: string) {
 
+  }
+
+  createFile(name: string) {
+    this.fileService.createFile(this.curProjectPath, name);
+    this.refresh();
+  }
+
+  public async buildProject(): Promise<BuildInfo> {
+    let rst: BuildInfo;
+    let output: string = '';
+    return new Promise<BuildInfo>(resolve => {
+      this.fileService.buildProject(this.curProjectPath).subscribe((data: BuildInfo) => {
+        const bi: BuildInfo = {...data};
+        console.log(bi);
+        resolve(bi);
+        return bi;
+      });
+    });
+    // this.fileService.buildProject(this.curProjectPath).toPromise();
+  }
+
+  installExtension()  {
+    this.fileService.installExtension(this.curProjectPath, this.projectName);
   }
 }
